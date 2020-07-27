@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable name="user" type="com.chiului.android_mvvm_architecture.bean.UserBean" />
+
+        <variable
+            name="eventlistener"
+            type="com.chiului.android_mvvm_architecture.MainActivity.EventListener" />
+
+        <variable
+            name="userModel"
+            type="com.chiului.android_mvvm_architecture.viewmodel.UserViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/tx_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前登录账号："
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tx_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{userModel.user.account}"
+            app:layout_constraintBottom_toBottomOf="@+id/tx_1"
+            app:layout_constraintStart_toEndOf="@+id/tx_1"
+            app:layout_constraintTop_toTopOf="@+id/tx_1"
+            tools:text="account" />
+
+        <TextView
+            android:id="@+id/tx_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前登录的密码："
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tx_1" />
+
+        <TextView
+            android:id="@+id/tx_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{userModel.user.psw}"
+            app:layout_constraintBottom_toBottomOf="@+id/tx_3"
+            app:layout_constraintStart_toEndOf="@+id/tx_3"
+            app:layout_constraintTop_toTopOf="@+id/tx_3"
+            tools:text="account" />
+
+
+        <EditText
+            android:id="@+id/ed_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={userModel.user.account}"
+            android:inputType="number"
+            android:hint="请输入账号"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/ed_paw"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/ed_paw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={userModel.user.psw}"
+            android:inputType="numberPassword"
+            android:hint="请输入密码"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="登录"
+            android:onClick="@{eventlistener::btnClick}"
+            android:onLongClick="@{eventlistener::onLongClick}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_paw" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
