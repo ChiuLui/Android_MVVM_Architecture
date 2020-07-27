@@ -1,11 +1,11 @@
 package com.chiului.android_mvvm_architecture;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.chiului.android_mvvm_architecture.base.BaseActivity;
 import com.chiului.android_mvvm_architecture.databinding.ActivityMainBinding;

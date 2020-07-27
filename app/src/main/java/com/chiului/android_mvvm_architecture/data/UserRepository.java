@@ -1,7 +1,5 @@
 package com.chiului.android_mvvm_architecture.data;
 
-import androidx.lifecycle.LiveData;
-
 import com.chiului.android_mvvm_architecture.bean.UserBean;
 
 /**

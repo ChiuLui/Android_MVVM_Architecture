@@ -7,7 +7,7 @@ import com.chiului.android_mvvm_architecture.bean.UserBean;
 import com.chiului.android_mvvm_architecture.data.UserRepository;
 
 /**
- * 基础 ViewModel$
+ * 用户 ViewModel$
  *
  * 注意：ViewModel 绝不能引用视图、Lifecycle 或可能存储对 Activity 上下文的引用的任何类。
  *
@@ -54,9 +54,9 @@ public class UserViewModel extends ViewModel {
     public void login() {
         UserBean user = mUser.getValue();
         user.setId("1");
-        //保存到 Repository
+        // 保存到 Repository
         mRepository.saveUser(user);
-        //通知刷新界面
+        // 通知刷新界面
         mUser.setValue(user);
     }
 
