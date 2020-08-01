@@ -16,6 +16,7 @@ buildscript {
         junitVersion = '4.13'
         gradleVersion = '4.0.0'
         roomVersion = '2.2.5'
+        annotationsVersion = '15.0'
 
     }
 

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.databinding.DataBindingUtil;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.chiului.android_mvvm_architecture.base.BaseActivity;
@@ -18,16 +18,25 @@ public class MainActivity extends BaseActivity {
     private UserViewModel mModel;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int setContentViewID() {
+        return R.layout.activity_main;
+    }
 
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+    @Override
+    protected void initViewModel() {
+        mBinding = getDataBinding(ActivityMainBinding.class);
 
         mModel = new ViewModelProvider(this, InjectorUtils.provideUserViewModelFactory(this)).get(UserViewModel.class);
 
         mBinding.setLifecycleOwner(this);
+
         mBinding.setUserModel(mModel);
+
         mBinding.setEventlistener(new EventListener());
+    }
+
+    @Override
+    protected void onCreating(@Nullable Bundle savedInstanceState) {
 
     }
 
