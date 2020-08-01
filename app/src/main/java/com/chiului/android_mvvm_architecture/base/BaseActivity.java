@@ -22,9 +22,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getLifecycle().addObserver(new BaseLifecycle());
         initBaseWidget();
         initViewModel();
-        getLifecycle().addObserver(new BaseLifecycle());
         onCreating(savedInstanceState);
     }
 

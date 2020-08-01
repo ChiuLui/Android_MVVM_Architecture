@@ -43,7 +43,8 @@ public class UserViewModel extends ViewModel {
     public void loadUsers() {
         // Do an asynchronous operation to fetch users.
         if (mRepository.getUser() != null) {
-            mUser.setValue(mRepository.getUser());
+            UserBean user = mRepository.getUser();
+            mUser.setValue(user);
         }
     }
 
@@ -53,6 +54,9 @@ public class UserViewModel extends ViewModel {
      */
     public void login() {
         UserBean user = mUser.getValue();
+        if (user == null) {
+            user = new UserBean();
+        }
         user.setId("1");
         // 保存到 Repository
         mRepository.saveUser(user);

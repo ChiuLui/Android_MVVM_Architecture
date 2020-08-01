@@ -23,9 +23,9 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getLifecycle().addObserver(new BaseLifecycle());
         initBaseWidget();
         initViewModel(inflater, container);
-        getLifecycle().addObserver(new BaseLifecycle());
         return onCreating(inflater, container, savedInstanceState);
     }
 
