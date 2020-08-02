@@ -30,26 +30,26 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * 初始化 ViewModel
-     */
-    protected void initViewModel(LayoutInflater inflater, @Nullable ViewGroup container){};
-
-    /**
-     * 初始化参数
-     */
-    protected void initBundle(@NotNull Bundle bundle) {}
-
-    /**
      * 初始化基类小工具
      * 在onCreating()之前
      */
-    protected void initBaseWidget(){
+    private void initBaseWidget(){
         Bundle data = getArguments();
         if (data != null) {
             initBundle(data);
         }
     }
 
-    protected abstract View onCreating(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
+    /**
+     * 初始化参数
+     */
+    public void initBundle(@NotNull Bundle bundle) {}
+
+    /**
+     * 初始化 ViewModel
+     */
+    public abstract void initViewModel(LayoutInflater inflater, @Nullable ViewGroup container);
+
+    public abstract View onCreating(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 
 }

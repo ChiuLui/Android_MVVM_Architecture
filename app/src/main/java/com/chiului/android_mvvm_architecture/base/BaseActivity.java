@@ -42,7 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 初始化基类小工具
      * 在onCreating()之前
      */
-    protected void initBaseWidget(){
+    private void initBaseWidget(){
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             initBundle(bundle);
@@ -52,22 +52,22 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 初始化数据
      */
-    protected void initBundle(Bundle bundle) {}
+    public void initBundle(Bundle bundle) {}
 
     /**
      * @return 布局文件ID
      */
-    protected abstract @LayoutRes int setContentViewID();
+    public abstract @LayoutRes int setContentViewID();
 
     /**
      * 初始化 ViewModel
      */
-    protected abstract void initViewModel();
+    public abstract void initViewModel();
 
     /**
      * 初始化操作
      * @param savedInstanceState
      */
-    protected abstract void onCreating(@Nullable Bundle savedInstanceState);
+    public abstract void onCreating(@Nullable Bundle savedInstanceState);
 
 }

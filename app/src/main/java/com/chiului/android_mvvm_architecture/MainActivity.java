@@ -18,12 +18,12 @@ public class MainActivity extends BaseActivity {
     private UserViewModel mModel;
 
     @Override
-    protected int setContentViewID() {
+    public int setContentViewID() {
         return R.layout.activity_main;
     }
 
     @Override
-    protected void initViewModel() {
+    public void initViewModel() {
         mBinding = getDataBinding(ActivityMainBinding.class);
 
         mModel = new ViewModelProvider(this, InjectorUtils.provideUserViewModelFactory(this)).get(UserViewModel.class);
@@ -36,7 +36,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreating(@Nullable Bundle savedInstanceState) {
+    public void onCreating(@Nullable Bundle savedInstanceState) {
 
     }
 
