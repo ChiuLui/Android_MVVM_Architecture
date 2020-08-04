@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -25,7 +26,7 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getLifecycle().addObserver(new BaseLifecycle());
         initBaseWidget();
-        initViewModel(inflater, container);
+        initViewModel(inflater, setContentViewID(), container);
         return onCreating(inflater, container, savedInstanceState);
     }
 
@@ -46,9 +47,14 @@ public abstract class BaseFragment extends Fragment {
     public void initBundle(@NotNull Bundle bundle) {}
 
     /**
+     * @return 布局文件ID
+     */
+    public abstract @LayoutRes int setContentViewID();
+
+    /**
      * 初始化 ViewModel
      */
-    public abstract void initViewModel(LayoutInflater inflater, @Nullable ViewGroup container);
+    public abstract void initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container);
 
     public abstract View onCreating(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 

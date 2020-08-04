@@ -18,13 +18,13 @@ import com.chiului.android_mvvm_architecture.data.UserRepository;
  * @author 神经大条蕾弟
  * @date 2020/07/21 09:34
  */
-public class UserViewModel extends ViewModel {
+public class LoginViewModel extends ViewModel {
 
     private final UserRepository mRepository;
 
     private MutableLiveData<UserBean> mUser;
 
-    public UserViewModel(UserRepository repository){
+    public LoginViewModel(UserRepository repository){
         mRepository = repository;
     }
 

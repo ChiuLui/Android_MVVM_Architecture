@@ -12,17 +12,17 @@ import com.chiului.android_mvvm_architecture.data.UserRepository;
  * @author 神经大条蕾弟
  * @date 2020/07/24 09:30
  */
-public class UserViewModelFactory implements ViewModelProvider.Factory {
+public class LoginViewModelFactory implements ViewModelProvider.Factory {
 
     private UserRepository userRepository;
 
-    public UserViewModelFactory (UserRepository userRepository) {
+    public LoginViewModelFactory(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new UserViewModel(userRepository);
+        return (T) new LoginViewModel(userRepository);
     }
 }
