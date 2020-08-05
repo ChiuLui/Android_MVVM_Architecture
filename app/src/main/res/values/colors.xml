@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#49bb79</color>
-    <color name="colorPrimaryDark">#005d2b</color>
-    <color name="colorAccent">#ffff63</color>
+    <color name="colorPrimary">#49BB79</color>
+    <color name="colorPrimaryDark">#005D2B</color>
+    <color name="colorAccent">#FFFF63</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 
     <!--BottomTab 颜色-->
     <color name="tab_bg">#49bb79</color>

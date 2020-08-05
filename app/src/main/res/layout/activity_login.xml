@@ -45,6 +45,7 @@
 
         <EditText
             android:id="@+id/ed_paw"
+            android:theme="@style/Theme_LoginEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -62,6 +63,7 @@
 
         <EditText
             android:id="@+id/ed_account"
+            android:theme="@style/Theme_LoginEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
