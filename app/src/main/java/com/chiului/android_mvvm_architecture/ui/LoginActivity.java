@@ -69,7 +69,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         String account = mViewModel.getAccount().getValue();
         String password = mViewModel.getPassword().getValue();
         if (!TextUtils.isEmpty(account) || !TextUtils.isEmpty(password)) {
-            if (account.length() < 6 || account.length() > 30) {
+            if (TextUtils.isEmpty(account)) {
+                //账号为空
+                isLogin = false;
+                mBinding.edAccount.setError(getString(R.string.invalid_account));
+            } else if (account.length() < 6 || account.length() > 30) {
                 //账号长度
                 isLogin = false;
                 mBinding.edAccount.setError(getString(R.string.invalid_account_size));
@@ -77,18 +81,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 //是否包含邮箱@
                 isLogin = false;
                 mBinding.edAccount.setError(getString(R.string.invalid_account_email));
+            } else if (TextUtils.isEmpty(password)) {
+                //密码为空
+                isLogin = false;
+                mBinding.edPaw.setError(getString(R.string.invalid_password));
             } else if (password.length() < 6 || password.length() > 20) {
                 //密码长度
                 isLogin = false;
                 mBinding.edPaw.setError(getString(R.string.invalid_password_size));
-            } else if (TextUtils.isEmpty(account)) {
-                //账号为空
-                isLogin = false;
-                mBinding.edAccount.setError(getString(R.string.invalid_account));
-            }  else if (TextUtils.isEmpty(password)) {
-                //密码为空
-                isLogin = false;
-                mBinding.edAccount.setError(getString(R.string.invalid_password));
             } else {
                 //通过
                 isLogin = true;
