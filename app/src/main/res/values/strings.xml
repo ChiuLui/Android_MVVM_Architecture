@@ -11,4 +11,6 @@
     <string name="invalid_password_size">密码长度范围 6～20</string>
     <string name="invalid_account">请输入账号</string>
     <string name="invalid_password">请输入密码</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

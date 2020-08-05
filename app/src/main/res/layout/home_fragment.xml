@@ -19,8 +19,12 @@
         tools:context=".ui.HomeFragment">
 
         <TextView
+            android:id="@+id/tx_page"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="50sp"
+            android:textStyle="bold"
             android:text="Hello" />
 
     </FrameLayout>

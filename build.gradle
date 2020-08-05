@@ -17,6 +17,8 @@ buildscript {
         gradleVersion = '4.0.0'
         roomVersion = '2.2.5'
         annotationsVersion = '15.0'
+        viewpager2Version = '1.0.0'
+        materialVersion = '1.1.0'
 
     }
 

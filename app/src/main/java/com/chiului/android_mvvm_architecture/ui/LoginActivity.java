@@ -59,7 +59,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
          * 登录成功
          */
         mViewModel.getUser().observe(this, bean -> {
-
+            MainActivity.actionStart(this);
         });
 
     }

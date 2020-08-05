@@ -1,21 +1,22 @@
 package com.chiului.android_mvvm_architecture.ui;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.base.BaseFragment;
 import com.chiului.android_mvvm_architecture.databinding.HomeFragmentBinding;
 import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
 import com.chiului.android_mvvm_architecture.viewmodel.HomeViewModel;
+
+import org.jetbrains.annotations.NotNull;
+
 /**
  * 首页碎片
  * @author 神经大条蕾弟
@@ -23,8 +24,11 @@ import com.chiului.android_mvvm_architecture.viewmodel.HomeViewModel;
  */
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
+    public static final String ARG_OBJECT = "object";
+
     private HomeViewModel mViewModel;
     private HomeFragmentBinding mBinding;
+    private String mPage;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -47,7 +51,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public View onCreating(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return null;
+
+        mBinding.txPage.setText(mPage);
+
+        return mBinding.getRoot();
+    }
+
+    @Override
+    public void initBundle(@NotNull Bundle bundle) {
+        super.initBundle(bundle);
+        mPage = bundle.getString(HomeFragment.ARG_OBJECT);
     }
 
     @Override

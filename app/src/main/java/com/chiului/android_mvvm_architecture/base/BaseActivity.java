@@ -1,5 +1,8 @@
 package com.chiului.android_mvvm_architecture.base;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.LayoutRes;
@@ -47,6 +50,24 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (bundle != null) {
             initBundle(bundle);
         }
+    }
+
+    /**
+     * 跳转页面
+     *
+     * @param context
+     * @param actClass
+     * @param bundle
+     */
+    public static void intentToActivity(Context context, Class actClass, Bundle bundle) {
+        Intent intent = new Intent(context, actClass);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(intent);
     }
 
     /**

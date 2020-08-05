@@ -3,7 +3,6 @@ package com.chiului.android_mvvm_architecture.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.chiului.android_mvvm_architecture.bean.UserBean;
 import com.chiului.android_mvvm_architecture.data.HomeRepository;
 
 
