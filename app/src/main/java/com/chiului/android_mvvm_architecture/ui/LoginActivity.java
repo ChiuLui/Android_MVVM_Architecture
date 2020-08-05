@@ -1,13 +1,12 @@
 package com.chiului.android_mvvm_architecture.ui;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.base.BaseActivity;
@@ -41,6 +40,61 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mBinding.setLoginModel(mViewModel);
 
         mBinding.setClickListener(this);
+
+        /**
+         * 账号
+         */
+        mViewModel.getAccount().observe(this, account -> {
+            checkLogin();
+        });
+
+        /**
+         * 密码
+         */
+        mViewModel.getPassword().observe(this, password -> {
+            checkLogin();
+        });
+
+        /**
+         * 登录成功
+         */
+        mViewModel.getUser().observe(this, bean -> {
+
+        });
+
+    }
+
+    private void checkLogin() {
+        boolean isLogin = false;
+        String account = mViewModel.getAccount().getValue();
+        String password = mViewModel.getPassword().getValue();
+        if (!TextUtils.isEmpty(account) || !TextUtils.isEmpty(password)) {
+            if (account.length() < 6 || account.length() > 30) {
+                //账号长度
+                isLogin = false;
+                mBinding.edAccount.setError(getString(R.string.invalid_account_size));
+            } else if (!account.contains("@")) {
+                //是否包含邮箱@
+                isLogin = false;
+                mBinding.edAccount.setError(getString(R.string.invalid_account_email));
+            } else if (password.length() < 6 || password.length() > 20) {
+                //密码长度
+                isLogin = false;
+                mBinding.edPaw.setError(getString(R.string.invalid_password_size));
+            } else if (TextUtils.isEmpty(account)) {
+                //账号为空
+                isLogin = false;
+                mBinding.edAccount.setError(getString(R.string.invalid_account));
+            }  else if (TextUtils.isEmpty(password)) {
+                //密码为空
+                isLogin = false;
+                mBinding.edAccount.setError(getString(R.string.invalid_password));
+            } else {
+                //通过
+                isLogin = true;
+            }
+        }
+        mBinding.btnLogin.setEnabled(isLogin);
     }
 
     @Override

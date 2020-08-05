@@ -12,72 +12,13 @@
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
 
-        <TextView
-            android:id="@+id/tx_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="当前登录账号："
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tx_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/tx_1"
-            app:layout_constraintStart_toEndOf="@+id/tx_1"
-            app:layout_constraintTop_toTopOf="@+id/tx_1"
-            tools:text="account" />
-
-        <TextView
-            android:id="@+id/tx_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="当前登录的密码："
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tx_1" />
-
-        <TextView
-            android:id="@+id/tx_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/tx_3"
-            app:layout_constraintStart_toEndOf="@+id/tx_3"
-            app:layout_constraintTop_toTopOf="@+id/tx_3"
-            tools:text="account" />
-
-
-        <EditText
-            android:id="@+id/ed_account"
+        <TableLayout
+            android:id="@+id/ly_tab"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="请输入账号"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/ed_paw"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/ed_paw"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberPassword"
-            android:hint="请输入密码"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="登录"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ed_paw" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

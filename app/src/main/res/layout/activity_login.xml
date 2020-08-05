@@ -58,7 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ed_account"
-            android:text="@={loginModel.user.psw}" />
+            android:text="@={loginModel.password}" />
 
         <EditText
             android:id="@+id/ed_account"
@@ -73,7 +73,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@={loginModel.user.account}" />
+            android:text="@={loginModel.account}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

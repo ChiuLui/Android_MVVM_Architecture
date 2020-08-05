@@ -24,6 +24,16 @@ public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<UserBean> mUser;
 
+    /**
+     * 账号
+     */
+    private MutableLiveData<String> mAccount;
+
+    /**
+     * 密码
+     */
+    private MutableLiveData<String> mPassword;
+
     public LoginViewModel(UserRepository repository){
         mRepository = repository;
     }
@@ -36,6 +46,22 @@ public class LoginViewModel extends ViewModel {
         return mUser;
     }
 
+    public MutableLiveData<String> getAccount() {
+        if (mAccount == null) {
+            mAccount = new MutableLiveData<String>();
+            loadUsers();
+        }
+        return mAccount;
+    }
+
+    public MutableLiveData<String> getPassword() {
+        if (mPassword == null) {
+            mPassword = new MutableLiveData<String>();
+            loadUsers();
+        }
+        return mPassword;
+    }
+
     /**
      * 从 Repository 获取数据
      * 注意：您必须调用 setValue(T) 方法以从主线程更新 LiveData 对象。如果在 worker 线程中执行代码，则您可以改用 postValue(T) 方法来更新 LiveData 对象。
@@ -44,7 +70,10 @@ public class LoginViewModel extends ViewModel {
         // Do an asynchronous operation to fetch users.
         if (mRepository.getUser() != null) {
             UserBean user = mRepository.getUser();
-            mUser.setValue(user);
+            if (user != null) {
+                getAccount().setValue(user.getAccount());
+                getPassword().setValue(user.getPsw());
+            }
         }
     }
 
@@ -53,15 +82,14 @@ public class LoginViewModel extends ViewModel {
      * 输入框的数据会及时反映到 LiveData ，但不会刷新界面
      */
     public void login() {
-        UserBean user = mUser.getValue();
-        if (user == null) {
-            user = new UserBean();
-        }
+        UserBean user = new UserBean();
         user.setId("1");
+        user.setAccount(getAccount().getValue());
+        user.setPsw(getPassword().getValue());
         // 保存到 Repository
         mRepository.saveUser(user);
-        // 通知刷新界面
-        mUser.setValue(user);
+        // 登录成功
+        getUser().setValue(user);
     }
 
 }
