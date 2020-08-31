@@ -8,17 +8,18 @@ buildscript {
         minSdkVersion = 19
         targetSdkVersion = 30
 
-        appCompatVersion = '1.1.0'
-        constraintLayoutVersion = '2.0.0-beta8'
+        appCompatVersion = '1.2.0'
+        constraintLayoutVersion = '2.0.1'
         lifecycleVersion = '2.2.0'
-        espressoVersion = '3.2.0'
-        testExtJunit = '1.1.1'
+        legacyVersion = '1.0.0'
+        espressoVersion = '3.3.0'
+        testExtJunit = '1.1.2'
         junitVersion = '4.13'
         gradleVersion = '4.0.0'
         roomVersion = '2.2.5'
         annotationsVersion = '15.0'
         viewpager2Version = '1.0.0'
-        materialVersion = '1.1.0'
+        materialVersion = '1.2.0'
 
     }
 
