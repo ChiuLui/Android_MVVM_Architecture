@@ -46,4 +46,11 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$rootProject.roomVersion"
     implementation "androidx.viewpager2:viewpager2:$rootProject.viewpager2Version"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "io.reactivex.rxjava3:rxjava:$rootProject.rxjavaVersion"
+    implementation "io.reactivex.rxjava3:rxandroid:$rootProject.rxandroidVersion"
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpLoggingVersion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitAdapterRxjavaVersion"
 }
