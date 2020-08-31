@@ -1,5 +1,6 @@
 package com.chiului.android_mvvm_architecture.data;
 
+import com.chiului.android_mvvm_architecture.api.UserService;
 import com.chiului.android_mvvm_architecture.bean.UserBean;
 
 /**
@@ -17,10 +18,15 @@ public class UserRepository {
      */
     private static UserDao mUserDao;
 
-    public static UserRepository getInstance(UserDao userDao){
-        mUserDao = userDao;
-        return SingletonHolder.Instance;
+    /**
+     * Retrofit 的接口
+     */
+    private static UserService mUserService;
 
+    public static UserRepository getInstance(UserDao userDao, UserService userService){
+        mUserDao = userDao;
+        mUserService = userService;
+        return SingletonHolder.Instance;
     }
 
     private static class SingletonHolder{

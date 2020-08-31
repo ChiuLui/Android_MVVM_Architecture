@@ -11,4 +11,9 @@ public class Constants {
 
     public static final String DATABASE_NAME = "app-db";
 
+    /**
+     * 服务器地址
+     */
+    public static final String AIP_BASE = "https://api.unsplash.com/";
+
 }
