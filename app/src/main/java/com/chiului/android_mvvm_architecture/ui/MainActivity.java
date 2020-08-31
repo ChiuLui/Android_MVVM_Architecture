@@ -37,8 +37,7 @@ public class MainActivity extends BaseActivity {
      * @param context
      */
     public static void actionStart(Context context) {
-        Bundle bundle = new Bundle();
-        intentToActivity(context, MainActivity.class, bundle);
+        startActivity(context, MainActivity.class);
     }
 
 }

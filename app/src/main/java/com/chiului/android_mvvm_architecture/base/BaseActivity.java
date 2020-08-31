@@ -55,12 +55,22 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 跳转页面
      *
-     * @param context
-     * @param actClass
-     * @param bundle
+     * @param context 来源
+     * @param cls 去向
      */
-    public static void intentToActivity(Context context, Class actClass, Bundle bundle) {
-        Intent intent = new Intent(context, actClass);
+    public static void startActivity(Context context, Class cls) {
+        startActivity(context, cls, null);
+    }
+
+    /**
+     * 跳转页面
+     *
+     * @param context 来源
+     * @param cls 去向
+     * @param bundle 携带参数
+     */
+    public static void startActivity(Context context, Class cls, Bundle bundle) {
+        Intent intent = new Intent(context, cls);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
@@ -68,6 +78,31 @@ public abstract class BaseActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
         context.startActivity(intent);
+    }
+
+    /**
+     * 跳转页面带请求码
+     * @param activity 来源
+     * @param cls 去向
+     * @param requestCode 请求码
+     */
+    public static void startActivity(Activity activity, Class cls, int requestCode) {
+        startActivity(activity, cls, requestCode, null);
+    }
+
+    /**
+     * 跳转页面带请求码
+     * @param activity 来源
+     * @param cls 去向
+     * @param requestCode 请求码
+     * @param bundle 携带参数
+     */
+    public static void startActivity(Activity activity, Class cls, int requestCode, Bundle bundle) {
+        Intent intent = new Intent(activity, cls);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        activity.startActivityForResult(intent, requestCode);
     }
 
     /**
