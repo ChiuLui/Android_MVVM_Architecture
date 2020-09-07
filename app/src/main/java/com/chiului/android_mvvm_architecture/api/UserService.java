@@ -24,4 +24,7 @@ public interface UserService {
                                 @Query("per_page") int perPage,
                                 @Query("client_id")String clientId);
 
+    @GET("api/account/users/")
+    Single<String> getUsers();
+
 }
