@@ -1,14 +1,13 @@
 package com.chiului.android_mvvm_architecture.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
+import com.chiului.android_mvvm_architecture.databinding.ItemFragmentBinding;
 
 import java.util.List;
 
@@ -25,16 +24,18 @@ public class ListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<ListFr
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_fragment, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(
+                ItemFragmentBinding.inflate(
+                LayoutInflater.from(parent.getContext()),
+                parent,
+                false)
+        );
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        DummyItemBean dummyItemBean = mValues.get(position);
+        holder.bind(dummyItemBean);
     }
 
     @Override
@@ -43,21 +44,22 @@ public class ListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<ListFr
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItemBean mItem;
 
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+        private ItemFragmentBinding binding;
+
+        public ViewHolder(ItemFragmentBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+        public void bind(DummyItemBean itemBean){
+            // 绑定数据
+            binding.setBean(itemBean);
+            // 绑定点击事件
+            binding.setClickListener(view -> {
+                Toast.makeText(binding.getRoot().getContext(), itemBean.getContent(), Toast.LENGTH_SHORT).show();
+            });
         }
+
     }
 }

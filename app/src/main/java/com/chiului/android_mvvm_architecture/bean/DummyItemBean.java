@@ -8,9 +8,9 @@ package com.chiului.android_mvvm_architecture.bean;
  */
 public class DummyItemBean {
 
-    public final String id;
-    public final String content;
-    public final String details;
+    public String id;
+    public String content;
+    public String details;
 
     public DummyItemBean(String id, String content, String details) {
         this.id = id;
@@ -18,9 +18,27 @@ public class DummyItemBean {
         this.details = details;
     }
 
-    @Override
-    public String toString() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getContent() {
         return content;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
 }
