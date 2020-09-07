@@ -8,7 +8,7 @@ import com.chiului.android_mvvm_architecture.utilities.Constants;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.ContentValues.TAG;
@@ -48,7 +48,7 @@ public class BaseApiService {
                     .baseUrl(Constants.AIP_BASE)// 配置BaseUrl
                     .client(client)// 设置client
                     .addConverterFactory(GsonConverterFactory.create())// gson转换器
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create());// RxJava 支持
+                    .addCallAdapterFactory(RxJava3CallAdapterFactory.create());// RxJava3 支持
             mRetrofit = builder.build();
         }
         return mRetrofit;

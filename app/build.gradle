@@ -52,5 +52,5 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpLoggingVersion"
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitAdapterRxjavaVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:$rootProject.retrofitVersion"
 }

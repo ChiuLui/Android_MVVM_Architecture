@@ -19,13 +19,12 @@ buildscript {
         roomVersion = '2.2.5'
         annotationsVersion = '15.0'
         viewpager2Version = '1.0.0'
-        materialVersion = '1.2.0'
+        materialVersion = '1.2.1'
+        rxjavaVersion = '3.0.6'
+        rxandroidVersion = '3.0.0'
         gsonVersion = '2.8.6'
         okhttpLoggingVersion = '4.7.2'
         retrofitVersion = '2.9.0'
-        retrofitAdapterRxjavaVersion = '2.1.0'
-        rxjavaVersion = '3.0.6'
-        rxandroidVersion = '3.0.0'
     }
 
     repositories {
