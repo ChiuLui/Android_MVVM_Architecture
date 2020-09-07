@@ -2,9 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <FrameLayout
-        android:id="@+id/ly_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/fragment_main"
+            android:name="com.chiului.android_mvvm_architecture.ui.MainFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </FrameLayout>
 

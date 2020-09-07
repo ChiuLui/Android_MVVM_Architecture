@@ -27,10 +27,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void onCreating(@Nullable Bundle savedInstanceState) {
-        MainFragment mainFragment = new MainFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.ly_root, mainFragment, "Main").commit();
-    }
+    public void onCreating(@Nullable Bundle savedInstanceState) { }
 
     /**
      * 页面跳转
