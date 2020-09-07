@@ -14,6 +14,6 @@ public class Constants {
     /**
      * 服务器地址
      */
-    public static final String AIP_BASE = "https://api.unsplash.com/";
+    public static final String AIP_BASE = "https://kydev.dottmed.com/";
 
 }

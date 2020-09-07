@@ -30,6 +30,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private HomeFragmentBinding mBinding;
     private String mPage;
 
+    /**
+     * Mandatory empty constructor for the fragment manager to instantiate the
+     * fragment (e.g. upon screen orientation changes).
+     */
+    public HomeFragment() {}
+
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }

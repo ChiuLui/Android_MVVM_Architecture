@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.chiului.android_mvvm_architecture.ui.HomeFragment;
+import com.chiului.android_mvvm_architecture.ui.ListFragment;
 
 /**
  * 主页的 ViewPager 2 适配器$
@@ -24,7 +25,17 @@ public class MainAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         // Return a NEW fragment instance in createFragment(int)
-        Fragment fragment = new HomeFragment();
+        Fragment fragment;
+        switch (position){
+            case 0:
+            case 1:
+            case 2:
+                fragment = HomeFragment.newInstance();
+                break;
+            case 3:
+            default:
+                fragment = ListFragment.newInstance(1);
+        }
         Bundle args = new Bundle();
         // Our object is just an integer :-P
         args.putString(HomeFragment.ARG_OBJECT, String.valueOf(position + 1));
