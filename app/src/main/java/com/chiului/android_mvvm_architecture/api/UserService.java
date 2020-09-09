@@ -18,13 +18,13 @@ public interface UserService {
 
     }
 
-    @GET("search/photos")
-    Single<String> searchPhotos(@Query("query") String query,
-                                @Query("page") int page,
-                                @Query("per_page") int perPage,
-                                @Query("client_id")String clientId);
-
-    @GET("api/account/users/")
-    Single<String> getUsers();
+//    @GET("search/photos")
+//    Single<String> searchPhotos(@Query("query") String query,
+//                                @Query("page") int page,
+//                                @Query("per_page") int perPage,
+//                                @Query("client_id")String clientId);
+//
+//    @GET("api/account/users/")
+//    Single<String> getUsers();
 
 }

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.adapter.ListFragmentRecyclerViewAdapter;
 import com.chiului.android_mvvm_architecture.base.BaseFragment;
-import com.chiului.android_mvvm_architecture.databinding.ListFragmentBinding;
+import com.chiului.android_mvvm_architecture.databinding.FragmentListBinding;
 import com.chiului.android_mvvm_architecture.dummy.DummyContent;
 
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ListFragment extends BaseFragment {
 
-    private ListFragmentBinding mBinding;
+    private FragmentListBinding mBinding;
 
     // Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -52,7 +52,7 @@ public class ListFragment extends BaseFragment {
 
     @Override
     public int setContentViewID() {
-        return R.layout.list_fragment;
+        return R.layout.fragment_list;
     }
 
     @Override
@@ -83,6 +83,7 @@ public class ListFragment extends BaseFragment {
             // 绑定适配器
             recyclerView.setAdapter(new ListFragmentRecyclerViewAdapter(DummyContent.ITEMS));
         }
+
         return rootView;
     }
 
