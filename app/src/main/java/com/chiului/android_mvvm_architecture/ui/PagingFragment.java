@@ -125,6 +125,7 @@ public class PagingFragment extends BaseFragment implements SwipeRefreshLayout.O
         // 绑定适配器
         mAdapter = new PagingFragmentRecyclerViewAdapter();
         recyclerView.setAdapter(mAdapter);
+        // 设置数据
         mAdapter.submitList(DummyContent.ITEMS);
     }
 

@@ -1,6 +1,5 @@
 package com.chiului.android_mvvm_architecture.adapter;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -12,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
 import com.chiului.android_mvvm_architecture.databinding.ItemFragmentBinding;
-
-import java.util.List;
 
 /**
  * 分页列表 Fragment 适配器

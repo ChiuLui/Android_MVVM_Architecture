@@ -4,24 +4,27 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
 import com.chiului.android_mvvm_architecture.databinding.ItemFragmentBinding;
-
-import java.util.List;
 
 /**
  * 列表 Fragment 适配器
  * @author 神经大条蕾弟
  * @date   2020/09/09 09:12
  */
-public class ListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<ListFragmentRecyclerViewAdapter.ViewHolder> {
+public class ListFragmentRecyclerViewAdapter extends ListAdapter<DummyItemBean, ListFragmentRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItemBean> mValues;
+    public ListFragmentRecyclerViewAdapter(){
+        super(new ListFragmentDiffCallback());
+    }
 
-    public ListFragmentRecyclerViewAdapter(List<DummyItemBean> items) {
-        mValues = items;
+    public ListFragmentRecyclerViewAdapter(@NonNull DiffUtil.ItemCallback<DummyItemBean> diffCallback) {
+        super(diffCallback);
     }
 
     @Override
@@ -36,13 +39,8 @@ public class ListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<ListFr
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        DummyItemBean dummyItemBean = mValues.get(position);
+        DummyItemBean dummyItemBean = getItem(position);
         holder.bind(dummyItemBean);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mValues.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,4 +62,23 @@ public class ListFragmentRecyclerViewAdapter extends RecyclerView.Adapter<ListFr
         }
 
     }
+
+    /**
+     * 比较 item 差异
+     */
+    public static class ListFragmentDiffCallback extends DiffUtil.ItemCallback<DummyItemBean> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull DummyItemBean oldItem, @NonNull DummyItemBean newItem) {
+            // 是否是相同的 item
+            return oldItem.getId().equals(newItem.getId());
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull DummyItemBean oldItem, @NonNull DummyItemBean newItem) {
+            // 是否是相同的内容
+            return oldItem.getDetails().equals(newItem.getDetails());
+        }
+    }
+
 }

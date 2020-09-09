@@ -33,6 +33,7 @@ public class ListFragment extends BaseFragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // Customize parameters
     private int mColumnCount = 1;
+    private ListFragmentRecyclerViewAdapter mAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -81,7 +82,10 @@ public class ListFragment extends BaseFragment {
             // app:spanCount="2"
 
             // 绑定适配器
-            recyclerView.setAdapter(new ListFragmentRecyclerViewAdapter(DummyContent.ITEMS));
+            mAdapter = new ListFragmentRecyclerViewAdapter();
+            recyclerView.setAdapter(mAdapter);
+            // 设置数据
+            mAdapter.submitList(DummyContent.ITEMS);
         }
 
         return rootView;

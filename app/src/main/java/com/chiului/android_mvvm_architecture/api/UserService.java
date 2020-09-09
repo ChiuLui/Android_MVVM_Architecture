@@ -1,9 +1,5 @@
 package com.chiului.android_mvvm_architecture.api;
 
-import io.reactivex.rxjava3.core.Single;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
-
 /**
  * 用户模块网络请求$
  *
