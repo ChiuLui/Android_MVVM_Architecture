@@ -30,13 +30,13 @@ import org.jetbrains.annotations.NotNull;
  */
 public class RefreshFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private MainViewModel mViewModel;
-    private FragmentRefreshBinding mBinding;
-
     // Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // Customize parameters
     private int mColumnCount = 1;
+
+    private MainViewModel mViewModel;
+    private FragmentRefreshBinding mBinding;
     private SwipeRefreshLayout mRefresh;
     private RefreshFragmentRecyclerViewAdapter mAdapter;
 

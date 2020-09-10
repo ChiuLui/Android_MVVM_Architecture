@@ -33,16 +33,15 @@ import java.util.List;
  */
 public class PagingFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private MainViewModel mViewModel;
-    private FragmentPagingBinding mBinding;
-
     // Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // Customize parameters
     private int mColumnCount = 1;
+
+    private MainViewModel mViewModel;
+    private FragmentPagingBinding mBinding;
     private SwipeRefreshLayout mRefresh;
     private PagingFragmentRecyclerViewAdapter mAdapter;
-    private List<DummyItemBean> mDataList;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
