@@ -13,7 +13,7 @@ import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.base.BaseFragment;
 import com.chiului.android_mvvm_architecture.databinding.HomeFragmentBinding;
 import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
-import com.chiului.android_mvvm_architecture.viewmodel.HomeViewModel;
+import com.chiului.android_mvvm_architecture.viewmodel.MainViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,7 +26,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     public static final String ARG_OBJECT = "object";
 
-    private HomeViewModel mViewModel;
+    private MainViewModel mViewModel;
     private HomeFragmentBinding mBinding;
     private String mPage;
 
@@ -48,7 +48,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container) {
         mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false);
-        mViewModel = new ViewModelProvider(this, InjectorUtils.provideHomeViewModelFactory(getActivity())).get(HomeViewModel.class);
+        mViewModel = new ViewModelProvider(this, InjectorUtils.provideMainViewModelFactory(getActivity())).get(MainViewModel.class);
         mBinding.setLifecycleOwner(this);
 
         mBinding.setViewModel(mViewModel);

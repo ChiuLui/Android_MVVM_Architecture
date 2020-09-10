@@ -4,9 +4,9 @@ import android.content.Context;
 
 import com.chiului.android_mvvm_architecture.api.UserService;
 import com.chiului.android_mvvm_architecture.data.AppDatabase;
-import com.chiului.android_mvvm_architecture.data.HomeRepository;
+import com.chiului.android_mvvm_architecture.data.MainRepository;
 import com.chiului.android_mvvm_architecture.data.UserRepository;
-import com.chiului.android_mvvm_architecture.viewmodel.HomeViewModelFactory;
+import com.chiului.android_mvvm_architecture.viewmodel.MainViewModelFactory;
 import com.chiului.android_mvvm_architecture.viewmodel.LoginViewModelFactory;
 
 /**
@@ -28,14 +28,14 @@ public final class InjectorUtils {
         return new LoginViewModelFactory(getLoginRepository(context));
     }
 
-    private static final HomeRepository getHomeRepository(Context context) {
-        return HomeRepository.getInstance(
+    private static final MainRepository getMainRepository(Context context) {
+        return MainRepository.getInstance(
                 AppDatabase.getInstance(context.getApplicationContext()).userDao()
         );
     }
 
-    public static final HomeViewModelFactory provideHomeViewModelFactory(Context context) {
-        return new HomeViewModelFactory(getHomeRepository(context));
+    public static final MainViewModelFactory provideMainViewModelFactory(Context context) {
+        return new MainViewModelFactory(getMainRepository(context));
     }
 
 }

@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.chiului.android_mvvm_architecture.data.HomeRepository;
+import com.chiului.android_mvvm_architecture.data.MainRepository;
 
 
 /**
@@ -13,17 +13,17 @@ import com.chiului.android_mvvm_architecture.data.HomeRepository;
  * @author 神经大条蕾弟
  * @date 2020/07/24 09:30
  */
-public class HomeViewModelFactory implements ViewModelProvider.Factory {
+public class MainViewModelFactory implements ViewModelProvider.Factory {
 
-    private HomeRepository mRepository;
+    private MainRepository mRepository;
 
-    public HomeViewModelFactory(HomeRepository repository) {
+    public MainViewModelFactory(MainRepository repository) {
         this.mRepository = repository;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new HomeViewModel(mRepository);
+        return (T) new MainViewModel(mRepository);
     }
 }

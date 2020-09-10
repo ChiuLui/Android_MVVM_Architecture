@@ -7,23 +7,23 @@ package com.chiului.android_mvvm_architecture.data;
  * @author 神经大条蕾弟
  * @date 2020/07/23 16:44
  */
-public class HomeRepository {
+public class MainRepository {
 
-    private HomeRepository(){}
+    private MainRepository(){}
 
     /**
      * Room 的数据库表对象
      */
     private static UserDao mAppCacheDao;
 
-    public static HomeRepository getInstance(UserDao appCacheDao){
+    public static MainRepository getInstance(UserDao appCacheDao){
         mAppCacheDao = appCacheDao;
         return SingletonHolder.Instance;
 
     }
 
     private static class SingletonHolder{
-        private static final HomeRepository Instance = new HomeRepository();
+        private static final MainRepository Instance = new MainRepository();
     }
 
 }

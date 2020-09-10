@@ -3,7 +3,7 @@ package com.chiului.android_mvvm_architecture.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.chiului.android_mvvm_architecture.data.HomeRepository;
+import com.chiului.android_mvvm_architecture.data.MainRepository;
 
 
 /**
@@ -12,16 +12,16 @@ import com.chiului.android_mvvm_architecture.data.HomeRepository;
  * @author 神经大条蕾弟
  * @date 2020/07/28 10:44
  */
-public class HomeViewModel extends ViewModel {
+public class MainViewModel extends ViewModel {
 
-    private HomeRepository mRepository;
+    private MainRepository mRepository;
 
     /**
      * 未读消息红点状态
      */
     private MutableLiveData<Boolean> mUnRead;
 
-    public HomeViewModel(HomeRepository repository){
+    public MainViewModel(MainRepository repository){
         mRepository = repository;
     }
 

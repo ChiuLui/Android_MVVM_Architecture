@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +18,8 @@ import com.chiului.android_mvvm_architecture.adapter.ListFragmentRecyclerViewAda
 import com.chiului.android_mvvm_architecture.base.BaseFragment;
 import com.chiului.android_mvvm_architecture.databinding.FragmentListBinding;
 import com.chiului.android_mvvm_architecture.dummy.DummyContent;
+import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
+import com.chiului.android_mvvm_architecture.viewmodel.MainViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,6 +29,8 @@ import org.jetbrains.annotations.NotNull;
  * @date   2020/09/07 16:35
  */
 public class ListFragment extends BaseFragment {
+
+    private MainViewModel mViewModel;
 
     private FragmentListBinding mBinding;
 
@@ -59,6 +64,7 @@ public class ListFragment extends BaseFragment {
     @Override
     public void initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container) {
         mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false);
+        mViewModel = new ViewModelProvider(this, InjectorUtils.provideMainViewModelFactory(getActivity())).get(MainViewModel.class);
         mBinding.setLifecycleOwner(this);
     }
 

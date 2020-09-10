@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.chiului.android_mvvm_architecture.viewmodel.HomeViewModel" />
+            type="com.chiului.android_mvvm_architecture.viewmodel.MainViewModel" />
 
         <variable
             name="clickListener"
