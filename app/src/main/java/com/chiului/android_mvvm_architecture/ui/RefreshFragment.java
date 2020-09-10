@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chiului.android_mvvm_architecture.R;
-import com.chiului.android_mvvm_architecture.adapter.PagingFragmentRecyclerViewAdapter;
+import com.chiului.android_mvvm_architecture.adapter.RefreshFragmentRecyclerViewAdapter;
 import com.chiului.android_mvvm_architecture.base.BaseFragment;
 import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
-import com.chiului.android_mvvm_architecture.databinding.FragmentPagingBinding;
+import com.chiului.android_mvvm_architecture.databinding.FragmentRefreshBinding;
 import com.chiului.android_mvvm_architecture.dummy.DummyContent;
 
 import org.jetbrains.annotations.NotNull;
@@ -35,30 +35,30 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
- * 带刷新与分页加载的列表示例
+ * 带刷新的列表示例
  * @author 神经大条蕾弟
  * @date   2020/09/09 15:16
  */
-public class PagingFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class RefreshFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private FragmentPagingBinding mBinding;
+    private FragmentRefreshBinding mBinding;
 
     // Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // Customize parameters
     private int mColumnCount = 1;
     private SwipeRefreshLayout mRefresh;
-    private PagingFragmentRecyclerViewAdapter mAdapter;
+    private RefreshFragmentRecyclerViewAdapter mAdapter;
     private List<DummyItemBean> mDataList;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public PagingFragment() {}
+    public RefreshFragment() {}
 
-    public static PagingFragment newInstance(int columnCount) {
-        PagingFragment fragment = new PagingFragment();
+    public static RefreshFragment newInstance(int columnCount) {
+        RefreshFragment fragment = new RefreshFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -67,7 +67,7 @@ public class PagingFragment extends BaseFragment implements SwipeRefreshLayout.O
 
     @Override
     public int setContentViewID() {
-        return R.layout.fragment_paging;
+        return R.layout.fragment_refresh;
     }
 
     @Override
@@ -123,7 +123,7 @@ public class PagingFragment extends BaseFragment implements SwipeRefreshLayout.O
         // app:spanCount="2"
 
         // 绑定适配器
-        mAdapter = new PagingFragmentRecyclerViewAdapter();
+        mAdapter = new RefreshFragmentRecyclerViewAdapter();
         recyclerView.setAdapter(mAdapter);
         // 设置数据
         mAdapter.submitList(DummyContent.ITEMS);

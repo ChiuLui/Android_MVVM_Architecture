@@ -9,6 +9,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.chiului.android_mvvm_architecture.ui.HomeFragment;
 import com.chiului.android_mvvm_architecture.ui.ListFragment;
 import com.chiului.android_mvvm_architecture.ui.PagingFragment;
+import com.chiului.android_mvvm_architecture.ui.RefreshFragment;
 
 /**
  * 主页的 ViewPager 2 适配器$
@@ -32,9 +33,11 @@ public class MainAdapter extends FragmentStateAdapter {
                 fragment = PagingFragment.newInstance(2);
                 break;
             case 2:
-                fragment = ListFragment.newInstance(1);
+                fragment = RefreshFragment.newInstance(2);
                 break;
             case 1:
+                fragment = ListFragment.newInstance(1);
+                break;
             case 0:
             default:
                 fragment = HomeFragment.newInstance();
