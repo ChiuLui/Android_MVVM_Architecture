@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,23 +17,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.adapter.RefreshFragmentRecyclerViewAdapter;
 import com.chiului.android_mvvm_architecture.base.BaseFragment;
-import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
 import com.chiului.android_mvvm_architecture.databinding.FragmentRefreshBinding;
-import com.chiului.android_mvvm_architecture.dummy.DummyContent;
+import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
+import com.chiului.android_mvvm_architecture.viewmodel.MainViewModel;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * 带刷新的列表示例
@@ -41,6 +30,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  */
 public class RefreshFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    private MainViewModel mViewModel;
     private FragmentRefreshBinding mBinding;
 
     // Customize parameter argument names
@@ -49,7 +39,6 @@ public class RefreshFragment extends BaseFragment implements SwipeRefreshLayout.
     private int mColumnCount = 1;
     private SwipeRefreshLayout mRefresh;
     private RefreshFragmentRecyclerViewAdapter mAdapter;
-    private List<DummyItemBean> mDataList;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -73,7 +62,15 @@ public class RefreshFragment extends BaseFragment implements SwipeRefreshLayout.
     @Override
     public void initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container) {
         mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false);
+        mViewModel = new ViewModelProvider(this, InjectorUtils.provideMainViewModelFactory(getActivity())).get(MainViewModel.class);
         mBinding.setLifecycleOwner(this);
+
+        mViewModel.getRefreshDate().observe(this, list -> {
+            // 改变列表数据（提交的数据不能与原数据同一内存地址，否则将不更新）
+            mAdapter.submitList(list);
+            // 关闭刷新
+            mRefresh.setRefreshing(false);
+        });
     }
 
     @Override
@@ -97,8 +94,7 @@ public class RefreshFragment extends BaseFragment implements SwipeRefreshLayout.
     @Override
     public void onRefresh() {
         // 下拉刷新
-
-        refresh();
+        mViewModel.getRefreshFragmentDate();
     }
 
     private void initSwipeRefresh() {
@@ -125,43 +121,8 @@ public class RefreshFragment extends BaseFragment implements SwipeRefreshLayout.
         // 绑定适配器
         mAdapter = new RefreshFragmentRecyclerViewAdapter();
         recyclerView.setAdapter(mAdapter);
-        // 设置数据
-        mAdapter.submitList(DummyContent.ITEMS);
-    }
-
-    private void refresh() {
-        Observable.timer(1, TimeUnit.SECONDS)
-                .take(3)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Long>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull Long aLong) {
-
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        // 模拟改变数据
-                        mDataList = new ArrayList<>();
-                        mDataList.addAll(DummyContent.ITEMS);
-                        Collections.shuffle(mDataList);
-                        // 改变列表数据（提交的数据不能与原数据同一内存地址，否则将不更新）
-                        mAdapter.submitList(mDataList);
-                        // 关闭刷新
-                        mRefresh.setRefreshing(false);
-                    }
-                });
+        // 获取数据
+        mViewModel.getRefreshFragmentDate();
     }
 
 }

@@ -17,7 +17,6 @@ import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.adapter.ListFragmentRecyclerViewAdapter;
 import com.chiului.android_mvvm_architecture.base.BaseFragment;
 import com.chiului.android_mvvm_architecture.databinding.FragmentListBinding;
-import com.chiului.android_mvvm_architecture.dummy.DummyContent;
 import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
 import com.chiului.android_mvvm_architecture.viewmodel.MainViewModel;
 
@@ -66,6 +65,11 @@ public class ListFragment extends BaseFragment {
         mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false);
         mViewModel = new ViewModelProvider(this, InjectorUtils.provideMainViewModelFactory(getActivity())).get(MainViewModel.class);
         mBinding.setLifecycleOwner(this);
+
+        mViewModel.getListDate().observe(this, list -> {
+            // 设置数据
+            mAdapter.submitList(list);
+        });
     }
 
     @Override
@@ -90,8 +94,8 @@ public class ListFragment extends BaseFragment {
             // 绑定适配器
             mAdapter = new ListFragmentRecyclerViewAdapter();
             recyclerView.setAdapter(mAdapter);
-            // 设置数据
-            mAdapter.submitList(DummyContent.ITEMS);
+            // 获取数据
+            mViewModel.getListFragmentDate();
         }
 
         return rootView;
