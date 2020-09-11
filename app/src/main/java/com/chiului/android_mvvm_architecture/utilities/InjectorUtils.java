@@ -6,8 +6,8 @@ import com.chiului.android_mvvm_architecture.api.UserService;
 import com.chiului.android_mvvm_architecture.data.AppDatabase;
 import com.chiului.android_mvvm_architecture.data.MainRepository;
 import com.chiului.android_mvvm_architecture.data.UserRepository;
-import com.chiului.android_mvvm_architecture.viewmodel.MainViewModelFactory;
 import com.chiului.android_mvvm_architecture.viewmodel.LoginViewModelFactory;
+import com.chiului.android_mvvm_architecture.viewmodel.MainViewModelFactory;
 
 /**
  * 获取存储库工具类$

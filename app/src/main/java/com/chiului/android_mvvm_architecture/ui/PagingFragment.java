@@ -17,17 +17,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.adapter.PagingFragmentRecyclerViewAdapter;
 import com.chiului.android_mvvm_architecture.base.BaseFragment;
-import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
 import com.chiului.android_mvvm_architecture.databinding.FragmentPagingBinding;
 import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
 import com.chiului.android_mvvm_architecture.viewmodel.MainViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 /**
- * 带刷新与分页加载的列表示例
+ * 带刷新与分页加载的列表示例(未加入官方组件 paging3， 原因：1.不是稳定 2.对 java 的支持并不友好.)
  * @author 神经大条蕾弟
  * @date   2020/09/09 15:16
  */
