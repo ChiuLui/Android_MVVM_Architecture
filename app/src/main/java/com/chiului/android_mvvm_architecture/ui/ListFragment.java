@@ -16,11 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.adapter.ListFragmentRecyclerViewAdapter;
 import com.chiului.android_mvvm_architecture.base.BaseFragment;
+import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
 import com.chiului.android_mvvm_architecture.databinding.FragmentListBinding;
 import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
 import com.chiului.android_mvvm_architecture.viewmodel.MainViewModel;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * RecyclerView 的示例
@@ -38,6 +42,8 @@ public class ListFragment extends BaseFragment {
     // Customize parameters
     private int mColumnCount = 1;
     private ListFragmentRecyclerViewAdapter mAdapter;
+
+    private List<DummyItemBean> mDataList;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -67,8 +73,10 @@ public class ListFragment extends BaseFragment {
         mBinding.setLifecycleOwner(this);
 
         mViewModel.getListDate().observe(this, list -> {
+            mDataList.clear();
+            mDataList.addAll(list);
             // 设置数据
-            mAdapter.submitList(list);
+            mAdapter.submitList(mDataList);
         });
     }
 
@@ -92,7 +100,8 @@ public class ListFragment extends BaseFragment {
             // app:spanCount="2"
 
             // 绑定适配器
-            mAdapter = new ListFragmentRecyclerViewAdapter();
+            mDataList = new ArrayList<>();
+            mAdapter = new ListFragmentRecyclerViewAdapter(mDataList);
             recyclerView.setAdapter(mAdapter);
             // 获取数据
             mViewModel.getListFragmentDate();

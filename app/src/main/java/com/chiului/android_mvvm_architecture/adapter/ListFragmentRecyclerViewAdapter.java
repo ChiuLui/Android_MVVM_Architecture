@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
 import com.chiului.android_mvvm_architecture.databinding.ItemFragmentBinding;
 
+import java.util.List;
+
 /**
  * 列表 Fragment 适配器
  * @author 神经大条蕾弟
@@ -19,8 +21,11 @@ import com.chiului.android_mvvm_architecture.databinding.ItemFragmentBinding;
  */
 public class ListFragmentRecyclerViewAdapter extends ListAdapter<DummyItemBean, ListFragmentRecyclerViewAdapter.ViewHolder> {
 
-    public ListFragmentRecyclerViewAdapter(){
+    private List<DummyItemBean> mDataList;
+
+    public ListFragmentRecyclerViewAdapter(List<DummyItemBean> dataList){
         super(new ListFragmentDiffCallback());
+        mDataList = dataList;
     }
 
     public ListFragmentRecyclerViewAdapter(@NonNull DiffUtil.ItemCallback<DummyItemBean> diffCallback) {
@@ -39,8 +44,7 @@ public class ListFragmentRecyclerViewAdapter extends ListAdapter<DummyItemBean, 
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        DummyItemBean dummyItemBean = getItem(position);
-        holder.bind(dummyItemBean);
+        holder.bind(position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -52,7 +56,8 @@ public class ListFragmentRecyclerViewAdapter extends ListAdapter<DummyItemBean, 
             this.binding = binding;
         }
 
-        public void bind(DummyItemBean itemBean){
+        public void bind(int position){
+            DummyItemBean itemBean = getItem(position);
             // 绑定数据
             binding.setBean(itemBean);
             // 绑定点击事件
@@ -61,6 +66,33 @@ public class ListFragmentRecyclerViewAdapter extends ListAdapter<DummyItemBean, 
             });
         }
 
+    }
+
+    /**
+     * 插入 Item
+     * @param position
+     * @param itemBean
+     */
+    public void addItem(int position, DummyItemBean itemBean) {
+        // 插入数据
+        mDataList.add(position, itemBean);
+        // 显示插入动画
+        notifyItemInserted(position);
+        // 重新计算大小(不加 RecyclerView 可能会数组越界)
+        notifyItemRangeChanged(position, getItemCount());
+    }
+
+    /**
+     * 删除 Item
+     * @param position
+     */
+    public void removeItem(int position) {
+        // 删除数据
+        mDataList.remove(position);
+        // 显示删除动画
+        notifyItemRemoved(position);
+        // 重新计算大小(不加 RecyclerView 可能会数组越界)
+        notifyItemRangeChanged(position, getItemCount());
     }
 
     /**
