@@ -99,7 +99,7 @@ public class PagingFragment extends BaseFragment implements SwipeRefreshLayout.O
 
     private void initSwipeRefresh() {
         mRefresh = mBinding.refresh;
-        mRefresh.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent);
+        mRefresh.setColorSchemeResources(R.color.color_primary, R.color.color_primary_dark, R.color.color_accent);
         mRefresh.setOnRefreshListener(this);
     }
 

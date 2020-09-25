@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#49BB79</color>
-    <color name="colorPrimaryDark">#005D2B</color>
-    <color name="colorAccent">#FFFF63</color>
+
+    <!--白天主题颜色-->
+    <color name="color_primary">#49BB79</color>
+    <color name="color_primary_dark">#005D2B</color>
+    <color name="color_accent">#FFFF63</color>
+
+    <!--夜晚主题颜色-->
+    <color name="color_primary_night">#99fafafa</color>
+    <color name="color_primary_dark_night">#1a231e</color>
+    <color name="color_accent_night">#6dc790</color>
+
+    <!--公共的颜色-->
     <color name="transparent">#00000000</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
-    <!--BottomTab 颜色-->
-    <color name="tab_bg">#49bb79</color>
-    <color name="tab_text_color">#005d2b</color>
-    <color name="tab_selected_text_color">#ffff63</color>
 </resources>

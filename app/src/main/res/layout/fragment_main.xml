@@ -25,9 +25,9 @@
                 android:layout_height="60dp"
                 app:tabMode="fixed"
                 app:tabIndicatorHeight="0dp"
-                app:tabBackground="@color/tab_bg"
-                app:tabTextColor="@color/tab_text_color"
-                app:tabSelectedTextColor="@color/tab_selected_text_color"
+                app:tabBackground="?attr/colorPrimary"
+                app:tabTextColor="?attr/colorPrimaryDark"
+                app:tabSelectedTextColor="?attr/colorAccent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
