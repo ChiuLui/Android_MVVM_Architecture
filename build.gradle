@@ -26,6 +26,7 @@ buildscript {
         okhttpLoggingVersion = '4.7.2'
         retrofitVersion = '2.9.0'
         recyclerViewVersion = '1.2.0-alpha05'
+        materialVersion = '1.2.1'
     }
 
     repositories {

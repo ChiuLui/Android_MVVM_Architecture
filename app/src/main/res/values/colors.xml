@@ -6,6 +6,7 @@
     <color name="color_primary_dark">#005D2B</color>
     <color name="color_accent">#FFFF63</color>
     <color name="color_bg">#FFFFFF</color>
+    <color name="color_title">#FFFFFF</color>
 
     <!--公共的颜色-->
     <color name="transparent">#00000000</color>
