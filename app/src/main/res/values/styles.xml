@@ -10,7 +10,12 @@
 
     <style name="Theme.AppTheme" parent="Base.Theme.AppTheme"/>
 
-    <style name="Theme.Login.EditText" parent="Theme.AppTheme">
+    <style name="Theme.AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.AppTheme.Login.EditText" parent="Theme.AppTheme">
         <item name="colorControlNormal">@color/transparent</item>
         <item name="colorControlActivated">@color/color_accent</item>
     </style>
