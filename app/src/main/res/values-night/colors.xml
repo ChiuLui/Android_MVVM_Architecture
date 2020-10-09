@@ -7,6 +7,8 @@
     <color name="color_accent">#6dc790</color>
     <color name="color_bg">#000000</color>
     <color name="color_title">#000000</color>
+    <color name="color_title_icon_bg">#000000</color>
+    <color name="color_title_icon_fg">#FFFFFF</color>
 
     <!--公共的颜色-->
     <color name="transparent">#00000000</color>

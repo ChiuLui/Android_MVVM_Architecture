@@ -2,10 +2,17 @@ package com.chiului.android_mvvm_architecture.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -22,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
  * @author 神经大条蕾弟
  * @date   2020/08/04 17:29
  */
-public class HomeFragment extends BaseFragment implements View.OnClickListener {
+public class HomeFragment extends BaseFragment {
 
     public static final String ARG_OBJECT = "object";
 
@@ -52,11 +59,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         mBinding.setLifecycleOwner(this);
 
         mBinding.setViewModel(mViewModel);
-        mBinding.setClickListener(this);
     }
 
     @Override
     public View onCreating(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        initTitleBar();
 
         mBinding.txPage.setText(mPage);
 
@@ -69,8 +77,38 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         mPage = bundle.getString(HomeFragment.ARG_OBJECT);
     }
 
-    @Override
-    public void onClick(View view) {
+    /**
+     * 初始化标题栏
+     */
+    private void initTitleBar() {
+        // 将 toolbar 设置成页面的 ActionBar（初始化）
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        Toolbar toolbar = mBinding.toolbar;
+        activity.setSupportActionBar(toolbar);
+        // 启用回退按钮
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // 设置回退按钮监听
+        toolbar.setNavigationOnClickListener(view -> getActivity().finish());
 
+        // 开启 ActionBar 菜单
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        // 设置菜单布局
+        inflater.inflate(R.menu.menu_home, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // 监听菜单
+            switch (item.getItemId()){
+                case R.id.menu_more:
+                    Toast.makeText(getActivity(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                    return true;
+                default:
+            }
+        return super.onOptionsItemSelected(item);
     }
 }

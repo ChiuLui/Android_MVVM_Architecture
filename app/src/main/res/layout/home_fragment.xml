@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -12,11 +12,33 @@
 
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".ui.HomeFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:navigationIcon="@drawable/ic_title_back"
+            app:menu="@menu/menu_home" >
+
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center"
+                android:text="@string/title_module"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_title"
+                android:textAppearance="?attr/textAppearanceHeadline5" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <TextView
             android:id="@+id/tx_page"
@@ -27,5 +49,5 @@
             android:textStyle="bold"
             android:text="Hello" />
 
-    </FrameLayout>
+    </LinearLayout>
 </layout>
