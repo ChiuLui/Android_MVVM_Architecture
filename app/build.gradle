@@ -55,4 +55,6 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava3:$rootProject.retrofitVersion"
     implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "androidx.activity:activity:$rootProject.activityVersion"
+    implementation "androidx.fragment:fragment:$rootProject.fragmentVersion"
 }

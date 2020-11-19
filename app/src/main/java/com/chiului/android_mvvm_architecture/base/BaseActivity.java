@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -81,28 +82,30 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 跳转页面带请求码
-     * @param activity 来源
-     * @param cls 去向
-     * @param requestCode 请求码
+     * 跳转页面带回调
+     * @param fromActivity 来源
+     * @param toCls 去向
+     * @param activityResultLauncher 注册的 registerForActivityResult 对象：示例👇
+     * private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(
+     *                               new ActivityResultContracts.StartActivityForResult(), result -> {});
      */
-    public static void startActivity(Activity activity, Class cls, int requestCode) {
-        startActivity(activity, cls, requestCode, null);
+    public static void startActivity(Activity fromActivity, Class toCls, ActivityResultLauncher<Intent> activityResultLauncher) {
+        startActivity(fromActivity, toCls, null, activityResultLauncher);
     }
 
     /**
-     * 跳转页面带请求码
-     * @param activity 来源
-     * @param cls 去向
-     * @param requestCode 请求码
+     * 跳转页面带回调
+     * @param fromActivity 来源
+     * @param toCls 去向
      * @param bundle 携带参数
+     * @param activityResultLauncher 注册的 registerForActivityResult 对象
      */
-    public static void startActivity(Activity activity, Class cls, int requestCode, Bundle bundle) {
-        Intent intent = new Intent(activity, cls);
+    public static void startActivity(Activity fromActivity, Class toCls, Bundle bundle , ActivityResultLauncher<Intent> activityResultLauncher) {
+        Intent intent = new Intent(fromActivity, toCls);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
-        activity.startActivityForResult(intent, requestCode);
+        activityResultLauncher.launch(intent);
     }
 
     /**
