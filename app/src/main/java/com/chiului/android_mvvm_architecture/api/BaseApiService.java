@@ -3,7 +3,6 @@ package com.chiului.android_mvvm_architecture.api;
 import android.util.Log;
 
 import com.chiului.android_mvvm_architecture.BuildConfig;
-import com.chiului.android_mvvm_architecture.utilities.Constants;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -12,6 +11,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.ContentValues.TAG;
+import static com.chiului.android_mvvm_architecture.utilities.ConstantsKt.AIP_BASE;
 
 /**
  * 网络请求基础服务$
@@ -45,7 +45,7 @@ public class BaseApiService {
                     .build();
 
             Retrofit.Builder builder = new Retrofit.Builder()
-                    .baseUrl(Constants.AIP_BASE)// 配置BaseUrl
+                    .baseUrl(AIP_BASE)// 配置BaseUrl
                     .client(client)// 设置client
                     .addConverterFactory(GsonConverterFactory.create())// gson转换器
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create());// RxJava3 支持

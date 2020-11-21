@@ -14,6 +14,11 @@ import com.chiului.android_mvvm_architecture.databinding.ActivityLoginBinding;
 import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
 import com.chiului.android_mvvm_architecture.viewmodel.LoginViewModel;
 
+import static com.chiului.android_mvvm_architecture.utilities.ConfigsKt.ACCOUNT_MAX_LENGTH;
+import static com.chiului.android_mvvm_architecture.utilities.ConfigsKt.ACCOUNT_MIN_LENGTH;
+import static com.chiului.android_mvvm_architecture.utilities.ConfigsKt.PASSWORD_MAX_LENGTH;
+import static com.chiului.android_mvvm_architecture.utilities.ConfigsKt.PASSWORD_MIN_LENGTH;
+
 /**
  * 登录页面
  * @author 神经大条蕾弟
@@ -69,15 +74,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         String account = mViewModel.getAccount().getValue();
         String password = mViewModel.getPassword().getValue();
         if (!TextUtils.isEmpty(account) || !TextUtils.isEmpty(password)) {
+
+            String mailFilter = "@";
+
             if (TextUtils.isEmpty(account)) {
                 //账号为空
                 isLogin = false;
                 mBinding.edAccount.setError(getString(R.string.invalid_account));
-            } else if (account.length() < 6 || account.length() > 30) {
+            } else if (account.length() < ACCOUNT_MIN_LENGTH || account.length() > ACCOUNT_MAX_LENGTH) {
                 //账号长度
                 isLogin = false;
                 mBinding.edAccount.setError(getString(R.string.invalid_account_size));
-            } else if (!account.contains("@")) {
+            } else if (!account.contains(mailFilter)) {
                 //是否包含邮箱@
                 isLogin = false;
                 mBinding.edAccount.setError(getString(R.string.invalid_account_email));
@@ -85,7 +93,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 //密码为空
                 isLogin = false;
                 mBinding.edPaw.setError(getString(R.string.invalid_password));
-            } else if (password.length() < 6 || password.length() > 20) {
+            } else if (password.length() < PASSWORD_MIN_LENGTH || password.length() > PASSWORD_MAX_LENGTH) {
                 //密码长度
                 isLogin = false;
                 mBinding.edPaw.setError(getString(R.string.invalid_password_size));
@@ -105,7 +113,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         mViewModel.login();
-        Toast.makeText(LoginActivity.this, "登录并缓存登录信息", Toast.LENGTH_LONG).show();
+        Toast.makeText(LoginActivity.this, R.string.succeed_login, Toast.LENGTH_LONG).show();
     }
 
 }

@@ -7,7 +7,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.chiului.android_mvvm_architecture.bean.UserBean;
-import com.chiului.android_mvvm_architecture.utilities.Constants;
+
+import static com.chiului.android_mvvm_architecture.utilities.ConstantsKt.DATABASE_NAME;
 
 /**
  * AppDatabase room 数据库$
@@ -32,7 +33,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static class SingletonHolder {
 
-        private static final AppDatabase Instance = Room.databaseBuilder(mContext, AppDatabase.class, Constants.DATABASE_NAME)
+        private static final AppDatabase Instance = Room.databaseBuilder(mContext, AppDatabase.class, DATABASE_NAME)
                 .allowMainThreadQueries()
                 .build();
 
