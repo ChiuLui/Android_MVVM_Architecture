@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -63,4 +64,8 @@ dependencies {
     implementation "com.google.android.material:material:$rootProject.materialVersion"
     implementation "androidx.activity:activity:$rootProject.activityVersion"
     implementation "androidx.fragment:fragment:$rootProject.fragmentVersion"
+    implementation "androidx.navigation:navigation-fragment:$rootProject.navVersion"
+    implementation "androidx.navigation:navigation-ui:$rootProject.navVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navVersion"
 }
