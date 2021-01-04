@@ -1,6 +1,5 @@
 package com.chiului.android_mvvm_architecture.ui;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.adapter.MainAdapter;
-import com.chiului.android_mvvm_architecture.base.BaseFragment;
+import com.chiului.android_mvvm_architecture.base.BaseNavFragment;
 import com.chiului.android_mvvm_architecture.databinding.FragmentMainBinding;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -19,7 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
  * @author 神经大条蕾弟
  * @date   2020/08/05 14:51
  */
-public class MainFragment extends BaseFragment {
+public class MainFragment extends BaseNavFragment {
 
     private FragmentMainBinding mBinding;
 
@@ -29,14 +28,14 @@ public class MainFragment extends BaseFragment {
     }
 
     @Override
-    public void initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container) {
+    public View initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container) {
         mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false);
         mBinding.setLifecycleOwner(this);
+        return mBinding.getRoot();
     }
 
     @Override
-    public View onCreating(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+    public void initView() {
         // 初始化适配器
         MainAdapter mainAdapter = new MainAdapter(this);
 
@@ -48,8 +47,6 @@ public class MainFragment extends BaseFragment {
             tab.setIcon(getTabIcon(position));
             tab.setText(getTabText(position));
         }).attach();
-
-        return mBinding.getRoot();
     }
 
     /**

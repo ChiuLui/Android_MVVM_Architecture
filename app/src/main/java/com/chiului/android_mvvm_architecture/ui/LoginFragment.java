@@ -1,16 +1,18 @@
 package com.chiului.android_mvvm_architecture.ui;
 
-import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.chiului.android_mvvm_architecture.R;
-import com.chiului.android_mvvm_architecture.base.BaseActivity;
-import com.chiului.android_mvvm_architecture.databinding.ActivityLoginBinding;
+import com.chiului.android_mvvm_architecture.base.BaseNavFragment;
+import com.chiului.android_mvvm_architecture.databinding.FragmentLoginBinding;
 import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
 import com.chiului.android_mvvm_architecture.viewmodel.LoginViewModel;
 
@@ -24,26 +26,22 @@ import static com.chiului.android_mvvm_architecture.utilities.ConfigsKt.PASSWORD
  * @author 神经大条蕾弟
  * @date   2020/08/04 18:15
  */
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+public class LoginFragment extends BaseNavFragment implements View.OnClickListener {
 
-    private ActivityLoginBinding mBinding;
+    private FragmentLoginBinding mBinding;
     private LoginViewModel mViewModel;
 
     @Override
     public int setContentViewID() {
-        return R.layout.activity_login;
+        return R.layout.fragment_login;
     }
 
     @Override
-    public void initViewModel() {
-        mBinding = getDataBinding(ActivityLoginBinding.class);
-
-        mViewModel = new ViewModelProvider(this, InjectorUtils.provideLoginViewModelFactory(this)).get(LoginViewModel.class);
-
+    public View initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container) {
+        mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false);
+        mViewModel = new ViewModelProvider(this, InjectorUtils.provideLoginViewModelFactory(getActivity())).get(LoginViewModel.class);
         mBinding.setLifecycleOwner(this);
-
         mBinding.setLoginModel(mViewModel);
-
         mBinding.setClickListener(this);
 
         /**
@@ -64,8 +62,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
          * 登录成功
          */
         mViewModel.getUser().observe(this, bean -> {
-            MainActivity.actionStart(this);
+            MainActivity.actionStart(getActivity());
         });
+
+        return mBinding.getRoot();
+    }
+
+    @Override
+    public void initView() {
 
     }
 
@@ -106,14 +110,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    public void onCreating(@Nullable Bundle savedInstanceState) {
-
-    }
-
-    @Override
     public void onClick(View view) {
         mViewModel.login();
-        Toast.makeText(LoginActivity.this, R.string.succeed_login, Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), R.string.succeed_login, Toast.LENGTH_LONG).show();
     }
 
 }
