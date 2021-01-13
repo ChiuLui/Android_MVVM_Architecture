@@ -112,7 +112,7 @@ public abstract class BaseNavFragment extends Fragment {
      * @param container
      * @return  碎片根布局
      */
-    public abstract View initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container);
+    public abstract View initViewModel( @NonNull LayoutInflater inflater, @NonNull int layoutId, @NonNull ViewGroup container);
 
     /**
      * 初始化 View

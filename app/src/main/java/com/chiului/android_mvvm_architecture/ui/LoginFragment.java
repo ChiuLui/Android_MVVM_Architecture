@@ -9,6 +9,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.base.BaseNavFragment;
@@ -58,11 +60,8 @@ public class LoginFragment extends BaseNavFragment implements View.OnClickListen
             checkLogin();
         });
 
-        /**
-         * 登录成功
-         */
-        mViewModel.getUser().observe(this, bean -> {
-            MainActivity.actionStart(getActivity());
+        mViewModel.getToken().observe(this, token -> {
+            toMain(mBinding.btnLogin);
         });
 
         return mBinding.getRoot();
@@ -112,7 +111,11 @@ public class LoginFragment extends BaseNavFragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
         mViewModel.login();
-        Toast.makeText(getActivity(), R.string.succeed_login, Toast.LENGTH_LONG).show();
+    }
+
+    private void toMain(View view) {
+        NavDirections toMainFragment = LoginFragmentDirections.actionLoginFragmentToMainFragment();
+        Navigation.findNavController(view).navigate(toMainFragment);
     }
 
 }

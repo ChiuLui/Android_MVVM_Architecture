@@ -24,6 +24,8 @@ public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<UserBean> mUser;
 
+    private MutableLiveData<String> mToken;
+
     /**
      * 账号
      */
@@ -44,6 +46,14 @@ public class LoginViewModel extends ViewModel {
             loadUsers();
         }
         return mUser;
+    }
+
+    public MutableLiveData<String> getToken() {
+        if (mToken == null) {
+            mToken = new MutableLiveData<String>();
+            loadUsers();
+        }
+        return mToken;
     }
 
     public MutableLiveData<String> getAccount() {
@@ -77,19 +87,32 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
+//    /**
+//     * 因为采用 LiveData 与 DataBinding 双向绑定：
+//     * 输入框的数据会及时反映到 LiveData ，但不会刷新界面
+//     */
+//    public void login() {
+//        UserBean user = new UserBean();
+//        user.setId("1");
+//        user.setAccount(getAccount().getValue());
+//        user.setPsw(getPassword().getValue());
+//        // 保存到 Repository
+//        mRepository.saveUser(user);
+//        // 登录成功
+//        getUser().setValue(user);
+//    }
+
     /**
      * 因为采用 LiveData 与 DataBinding 双向绑定：
      * 输入框的数据会及时反映到 LiveData ，但不会刷新界面
      */
     public void login() {
-        UserBean user = new UserBean();
-        user.setId("1");
-        user.setAccount(getAccount().getValue());
-        user.setPsw(getPassword().getValue());
-        // 保存到 Repository
-        mRepository.saveUser(user);
+        // 获取 token
+//        mRepository.getToken(getAccount().getValue(), getPassword().getValue());
+        // 保存到 Token 到 Repository（存储库）
+//        mRepository.saveUser(user);
         // 登录成功
-        getUser().setValue(user);
+        getToken().setValue("fsdlfsllfjljldj");
     }
 
 }

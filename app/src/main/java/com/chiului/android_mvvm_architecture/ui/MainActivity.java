@@ -1,6 +1,5 @@
 package com.chiului.android_mvvm_architecture.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -36,13 +35,5 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onCreating(@Nullable Bundle savedInstanceState) { }
-
-    /**
-     * 页面跳转
-     * @param context
-     */
-    public static void actionStart(Context context) {
-        startActivity(context, MainActivity.class);
-    }
 
 }
