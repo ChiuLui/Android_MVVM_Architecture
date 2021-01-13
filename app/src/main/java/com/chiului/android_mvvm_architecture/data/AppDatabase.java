@@ -6,6 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.chiului.android_mvvm_architecture.bean.AppCacheBean;
 import com.chiului.android_mvvm_architecture.bean.UserBean;
 
 import static com.chiului.android_mvvm_architecture.utilities.ConstantsKt.DATABASE_NAME;
@@ -16,10 +17,20 @@ import static com.chiului.android_mvvm_architecture.utilities.ConstantsKt.DATABA
  * @author 神经大条蕾弟
  * @date 2020/07/23 12:09
  */
-@Database(entities = {UserBean.class}, version = 1, exportSchema = false)
+@Database(entities = {UserBean.class, AppCacheBean.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
+    /**
+     * 用户表
+     * @return
+     */
     public abstract UserDao userDao();
+
+    /**
+     * app 缓存表
+     * @return
+     */
+    public abstract AppCacheDao appCacheDao();
 
     private static Context mContext;
 

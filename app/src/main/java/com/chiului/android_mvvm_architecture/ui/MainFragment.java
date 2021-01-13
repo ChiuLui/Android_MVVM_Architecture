@@ -6,11 +6,14 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.adapter.MainAdapter;
 import com.chiului.android_mvvm_architecture.base.BaseNavFragment;
 import com.chiului.android_mvvm_architecture.databinding.FragmentMainBinding;
+import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
+import com.chiului.android_mvvm_architecture.viewmodel.MainViewModel;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 /**
@@ -21,6 +24,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 public class MainFragment extends BaseNavFragment {
 
     private FragmentMainBinding mBinding;
+    private MainViewModel mViewModel;
 
     @Override
     public int setContentViewID() {
@@ -31,11 +35,17 @@ public class MainFragment extends BaseNavFragment {
     public View initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container) {
         mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false);
         mBinding.setLifecycleOwner(this);
+        mViewModel = new ViewModelProvider(this, InjectorUtils.provideMainViewModelFactory(getActivity())).get(MainViewModel.class);
         return mBinding.getRoot();
     }
 
     @Override
     public void initView() {
+        initFragments();
+        mViewModel.initUserInfo();
+    }
+
+    private void initFragments() {
         // 初始化适配器
         MainAdapter mainAdapter = new MainAdapter(this);
 

@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.chiului.android_mvvm_architecture.data.UserRepository;
+import com.chiului.android_mvvm_architecture.data.LoginRepository;
 
 /**
  * $ UserViewModel 的工厂方法
@@ -14,15 +14,15 @@ import com.chiului.android_mvvm_architecture.data.UserRepository;
  */
 public class LoginViewModelFactory implements ViewModelProvider.Factory {
 
-    private UserRepository userRepository;
+    private LoginRepository loginRepository;
 
-    public LoginViewModelFactory(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public LoginViewModelFactory(LoginRepository loginRepository) {
+        this.loginRepository = loginRepository;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new LoginViewModel(userRepository);
+        return (T) new LoginViewModel(loginRepository);
     }
 }

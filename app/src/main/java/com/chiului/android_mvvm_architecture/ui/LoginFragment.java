@@ -4,10 +4,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -32,6 +32,8 @@ public class LoginFragment extends BaseNavFragment implements View.OnClickListen
 
     private FragmentLoginBinding mBinding;
     private LoginViewModel mViewModel;
+
+    private Observer<String> observer;
 
     @Override
     public int setContentViewID() {
@@ -60,9 +62,17 @@ public class LoginFragment extends BaseNavFragment implements View.OnClickListen
             checkLogin();
         });
 
-        mViewModel.getToken().observe(this, token -> {
-            toMain(mBinding.btnLogin);
-        });
+        /**
+         * 登录成功
+         */
+        if (observer == null) {
+            // 防止重复订阅
+            observer = token -> {
+                toMain();
+            };
+
+            mViewModel.getToken().observe(this, observer);
+        }
 
         return mBinding.getRoot();
     }
@@ -113,9 +123,9 @@ public class LoginFragment extends BaseNavFragment implements View.OnClickListen
         mViewModel.login();
     }
 
-    private void toMain(View view) {
+    private void toMain() {
         NavDirections toMainFragment = LoginFragmentDirections.actionLoginFragmentToMainFragment();
-        Navigation.findNavController(view).navigate(toMainFragment);
+        Navigation.findNavController(mBinding.btnLogin).navigate(toMainFragment);
     }
 
 }

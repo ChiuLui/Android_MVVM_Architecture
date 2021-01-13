@@ -5,7 +5,7 @@ import android.content.Context;
 import com.chiului.android_mvvm_architecture.api.UserService;
 import com.chiului.android_mvvm_architecture.data.AppDatabase;
 import com.chiului.android_mvvm_architecture.data.MainRepository;
-import com.chiului.android_mvvm_architecture.data.UserRepository;
+import com.chiului.android_mvvm_architecture.data.LoginRepository;
 import com.chiului.android_mvvm_architecture.viewmodel.LoginViewModelFactory;
 import com.chiului.android_mvvm_architecture.viewmodel.MainViewModelFactory;
 
@@ -17,9 +17,9 @@ import com.chiului.android_mvvm_architecture.viewmodel.MainViewModelFactory;
  */
 public final class InjectorUtils {
 
-    private static final UserRepository getLoginRepository(Context context) {
-        return UserRepository.getInstance(
-                AppDatabase.getInstance(context.getApplicationContext()).userDao(),
+    private static final LoginRepository getLoginRepository(Context context) {
+        return LoginRepository.getInstance(
+                AppDatabase.getInstance(context.getApplicationContext()).appCacheDao(),
                 UserService.create()
         );
     }

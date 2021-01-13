@@ -1,10 +1,12 @@
 package com.chiului.android_mvvm_architecture.viewmodel;
 
+import android.text.TextUtils;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.chiului.android_mvvm_architecture.bean.UserBean;
-import com.chiului.android_mvvm_architecture.data.UserRepository;
+import com.chiului.android_mvvm_architecture.data.LoginRepository;
 
 /**
  * 用户 ViewModel$
@@ -20,9 +22,7 @@ import com.chiului.android_mvvm_architecture.data.UserRepository;
  */
 public class LoginViewModel extends ViewModel {
 
-    private final UserRepository mRepository;
-
-    private MutableLiveData<UserBean> mUser;
+    private final LoginRepository mRepository;
 
     private MutableLiveData<String> mToken;
 
@@ -36,22 +36,13 @@ public class LoginViewModel extends ViewModel {
      */
     private MutableLiveData<String> mPassword;
 
-    public LoginViewModel(UserRepository repository){
+    public LoginViewModel(LoginRepository repository){
         mRepository = repository;
-    }
-
-    public MutableLiveData<UserBean> getUser() {
-        if (mUser == null) {
-            mUser = new MutableLiveData<UserBean>();
-            loadUsers();
-        }
-        return mUser;
     }
 
     public MutableLiveData<String> getToken() {
         if (mToken == null) {
             mToken = new MutableLiveData<String>();
-            loadUsers();
         }
         return mToken;
     }
@@ -59,7 +50,7 @@ public class LoginViewModel extends ViewModel {
     public MutableLiveData<String> getAccount() {
         if (mAccount == null) {
             mAccount = new MutableLiveData<String>();
-            loadUsers();
+            loadAccount();
         }
         return mAccount;
     }
@@ -67,7 +58,6 @@ public class LoginViewModel extends ViewModel {
     public MutableLiveData<String> getPassword() {
         if (mPassword == null) {
             mPassword = new MutableLiveData<String>();
-            loadUsers();
         }
         return mPassword;
     }
@@ -76,37 +66,21 @@ public class LoginViewModel extends ViewModel {
      * 从 Repository 获取数据
      * 注意：您必须调用 setValue(T) 方法以从主线程更新 LiveData 对象。如果在 worker 线程中执行代码，则您可以改用 postValue(T) 方法来更新 LiveData 对象。
      */
-    public void loadUsers() {
+    public void loadAccount() {
         // Do an asynchronous operation to fetch users.
-        if (mRepository.getUser() != null) {
-            UserBean user = mRepository.getUser();
-            if (user != null) {
-                getAccount().setValue(user.getAccount());
-                getPassword().setValue(user.getPsw());
-            }
+        String account = mRepository.getAccount();
+        if (!TextUtils.isEmpty(account)) {
+            getAccount().setValue(account);
         }
     }
-
-//    /**
-//     * 因为采用 LiveData 与 DataBinding 双向绑定：
-//     * 输入框的数据会及时反映到 LiveData ，但不会刷新界面
-//     */
-//    public void login() {
-//        UserBean user = new UserBean();
-//        user.setId("1");
-//        user.setAccount(getAccount().getValue());
-//        user.setPsw(getPassword().getValue());
-//        // 保存到 Repository
-//        mRepository.saveUser(user);
-//        // 登录成功
-//        getUser().setValue(user);
-//    }
 
     /**
      * 因为采用 LiveData 与 DataBinding 双向绑定：
      * 输入框的数据会及时反映到 LiveData ，但不会刷新界面
      */
     public void login() {
+        // 保存到账号 Repository
+        mRepository.saveAccount(getAccount().getValue());
         // 获取 token
 //        mRepository.getToken(getAccount().getValue(), getPassword().getValue());
         // 保存到 Token 到 Repository（存储库）

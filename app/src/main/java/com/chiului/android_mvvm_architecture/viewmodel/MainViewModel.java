@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
+import com.chiului.android_mvvm_architecture.bean.UserBean;
 import com.chiului.android_mvvm_architecture.data.MainRepository;
 import com.chiului.android_mvvm_architecture.dummy.DummyContent;
 
@@ -31,6 +32,11 @@ public class MainViewModel extends ViewModel {
     private MainRepository mRepository;
 
     /**
+     * 用户信息
+     */
+    private MutableLiveData<UserBean> mUserInfoBean;
+
+    /**
      * ListFragment 数据
      */
     private MutableLiveData<List<DummyItemBean>> mListDate;
@@ -47,6 +53,13 @@ public class MainViewModel extends ViewModel {
 
     public MainViewModel(MainRepository repository){
         mRepository = repository;
+    }
+
+    public MutableLiveData<UserBean> getUserInfoBean() {
+        if (mUserInfoBean == null) {
+            mUserInfoBean = new MutableLiveData<UserBean>();
+        }
+        return mUserInfoBean;
     }
 
     public MutableLiveData<List<DummyItemBean>> getListDate() {
@@ -132,6 +145,16 @@ public class MainViewModel extends ViewModel {
                         getPagingDate().setValue(items);
                     }
                 });
+    }
+
+    public void getUserInfo() {
+        // TODO: 1/13/21 神经大条蕾弟：获取 token 然后去本地数据库查询用户信息
+        UserBean userInfo = mRepository.getLocalUserInfo("token");
+        getUserInfoBean().setValue(userInfo);
+    }
+
+    public void initUserInfo(){
+        mRepository.getRemoteUserInfo();
     }
 
 }
