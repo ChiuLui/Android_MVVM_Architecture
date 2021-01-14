@@ -41,6 +41,7 @@ public class MainFragment extends BaseNavFragment {
 
     @Override
     public void initView() {
+        setTopStack(true);
         initFragments();
         mViewModel.initUserInfo();
     }

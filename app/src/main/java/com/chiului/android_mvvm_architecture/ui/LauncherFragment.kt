@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.chiului.android_mvvm_architecture.R
 import com.chiului.android_mvvm_architecture.base.BaseNavFragment
 import com.chiului.android_mvvm_architecture.databinding.FragmentLauncherBinding
+import com.chiului.android_mvvm_architecture.utilities.MODE_GUEST
 import kotlinx.coroutines.*
 
 /**
@@ -31,9 +32,24 @@ class LauncherFragment : BaseNavFragment() {
     override fun initView() {
         GlobalScope.launch(Dispatchers.Main) {
             startDelay()
-            var toLoginFragment = LauncherFragmentDirections.actionLauncherFragmentToLoginFragment()
-            findNavController().navigate(toLoginFragment)
+            if (MODE_GUEST) {
+                // 游客模式
+                toMainFragment();
+            } else {
+                // 非游客模式
+                toLoginFragment()
+            }
         }
+    }
+
+    private fun toMainFragment() {
+        var toMainFragment = LauncherFragmentDirections.actionLauncherFragmentToMainFragment()
+        findNavController().navigate(toMainFragment)
+    }
+
+    private fun toLoginFragment() {
+        var toLoginFragment = LauncherFragmentDirections.actionLauncherFragmentToLoginFragment()
+        findNavController().navigate(toLoginFragment)
     }
 
     private suspend fun startDelay() {

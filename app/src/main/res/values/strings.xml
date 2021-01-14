@@ -13,6 +13,5 @@
     <string name="title_module_4">列表示例</string>
     <string name="menu_more">更多</string>
     <string name="succeed_login">登录成功并缓存登录信息</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="toast_back_exit">再按一次退出</string>
 </resources>

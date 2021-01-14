@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.base.BaseNavFragment;
 import com.chiului.android_mvvm_architecture.databinding.FragmentLoginBinding;
+import com.chiului.android_mvvm_architecture.utilities.ConfigsKt;
 import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
 import com.chiului.android_mvvm_architecture.viewmodel.LoginViewModel;
 
@@ -79,7 +80,7 @@ public class LoginFragment extends BaseNavFragment implements View.OnClickListen
 
     @Override
     public void initView() {
-
+        setTopStack(!ConfigsKt.MODE_GUEST);
     }
 
     private void checkLogin() {

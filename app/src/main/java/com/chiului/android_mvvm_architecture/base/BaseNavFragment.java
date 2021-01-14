@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.LayoutRes;
@@ -11,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.lifecycler.BaseLifecycle;
+import com.chiului.android_mvvm_architecture.utilities.ConfigsKt;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -29,6 +32,12 @@ public abstract class BaseNavFragment extends Fragment {
      * 是否为导航图栈顶（最上层）（该参数为子类控制）
      */
     private boolean isTopStack = false;
+
+    /**
+     * 点击回退记录时间戳
+     */
+    private long mExitTime;
+
     private View mRootView;
 
     public boolean isTopStack() {
@@ -73,14 +82,26 @@ public abstract class BaseNavFragment extends Fragment {
     public void navUp() {
         if (isTopStack) {
             // 最上层直接关闭
-            getActivity().finish();
+            backExit();
         } else {
             // 由系统判断
             boolean navigateUp = findNavController(BaseNavFragment.this).navigateUp();
             if (!navigateUp) {
                 // 没有上一层就关闭 Activity
-                getActivity().finish();
+                backExit();
             }
+        }
+    }
+
+    /**
+     * 关闭 Activity
+     */
+    private void backExit() {
+        if (System.currentTimeMillis() - mExitTime > ConfigsKt.BACK_EXIT) {
+            Toast.makeText(getActivity(), R.string.toast_back_exit, Toast.LENGTH_SHORT).show();
+            mExitTime = System.currentTimeMillis();
+        } else {
+            getActivity().finish();
         }
     }
 
