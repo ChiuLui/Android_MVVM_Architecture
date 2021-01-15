@@ -15,28 +15,28 @@ public class AppCacheBean {
 
     @NonNull
     @PrimaryKey
-    private String appKey;
-    private String appValue;
+    private String key;
+    private String value;
 
-    public AppCacheBean(String appKey, String appValue){
-        this.appKey = appKey;
-        this.appValue = appValue;
+    public AppCacheBean(String key, String value){
+        this.key = key;
+        this.value = value;
     }
 
     @NonNull
-    public String getAppKey() {
-        return appKey;
+    public String getKey() {
+        return key;
     }
 
-    public void setAppKey(@NonNull String appKey) {
-        this.appKey = appKey;
+    public void setKey(@NonNull String key) {
+        this.key = key;
     }
 
-    public String getAppValue() {
-        return appValue;
+    public String getValue() {
+        return value;
     }
 
-    public void setAppValue(String appValue) {
-        this.appValue = appValue;
+    public void setValue(String value) {
+        this.value = value;
     }
 }

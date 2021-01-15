@@ -18,6 +18,9 @@ interface UserService {
             @Body body: RequestBody
     ): Single<BaseBean<String>>
 
+    // TODO: 1/16/21 神经大条蕾弟：还差请求个人信息接口
+
+    // TODO: 1/16/21 神经大条蕾弟：还差退出登录接口
 //    @Headers("Content-type:application/json;charset=UTF-8")
 //    @POST("api/base/login/")
 //    suspend fun login(

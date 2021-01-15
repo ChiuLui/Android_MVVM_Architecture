@@ -103,8 +103,6 @@ public class LoginFragment extends BaseNavFragment implements View.OnClickListen
         String password = mViewModel.getPassword().getValue();
         if (!TextUtils.isEmpty(account) || !TextUtils.isEmpty(password)) {
 
-            String mailFilter = "@";
-
             if (TextUtils.isEmpty(account)) {
                 //账号为空
                 isLogin = false;
@@ -113,10 +111,6 @@ public class LoginFragment extends BaseNavFragment implements View.OnClickListen
                 //账号长度
                 isLogin = false;
                 mBinding.edAccount.setError(getString(R.string.invalid_account_size));
-            } else if (!account.contains(mailFilter)) {
-                //是否包含邮箱@
-                isLogin = false;
-                mBinding.edAccount.setError(getString(R.string.invalid_account_email));
             } else if (TextUtils.isEmpty(password)) {
                 //密码为空
                 isLogin = false;

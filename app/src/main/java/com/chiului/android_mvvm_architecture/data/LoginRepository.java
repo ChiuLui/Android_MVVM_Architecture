@@ -1,5 +1,6 @@
 package com.chiului.android_mvvm_architecture.data;
 
+import com.chiului.android_mvvm_architecture.api.BaseApiService;
 import com.chiului.android_mvvm_architecture.api.UserService;
 import com.chiului.android_mvvm_architecture.bean.AppCacheBean;
 import com.chiului.android_mvvm_architecture.bean.BaseBean;
@@ -7,7 +8,6 @@ import com.chiului.android_mvvm_architecture.utilities.AppCacheConstantsKt;
 import com.google.gson.JsonObject;
 
 import io.reactivex.rxjava3.core.Single;
-import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 /**
@@ -47,18 +47,22 @@ public class LoginRepository {
     public String getAccount(){
         AppCacheBean appCache = mAppCacheDao.getAppCache(AppCacheConstantsKt.ACCOUNT_BEFORE);
         if (appCache != null) {
-            return appCache.getAppValue();
+            return appCache.getValue();
         } else {
             return "";
         }
+    }
+
+    public void saveToken(String token){
+        AppCacheBean appCacheBean = new AppCacheBean(AppCacheConstantsKt.TOKEN, token);
+        mAppCacheDao.insertAppCache(appCacheBean);
     }
 
     public Single<BaseBean<String>> getToken(String account, String psw){
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("userName", account);
         jsonObject.addProperty("password", psw);
-        String json = jsonObject.toString();
-        RequestBody requestBody = RequestBody.create(json, MediaType.parse("application/json; charset=UTF-8"));
+        RequestBody requestBody = BaseApiService.getJsonRequestBody(jsonObject.toString());
         Single<BaseBean<String>> single = mUserService.login(requestBody);
         return single;
     }

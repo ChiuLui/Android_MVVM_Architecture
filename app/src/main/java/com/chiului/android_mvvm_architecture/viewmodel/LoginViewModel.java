@@ -1,14 +1,14 @@
 package com.chiului.android_mvvm_architecture.viewmodel;
 
 import android.text.TextUtils;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.chiului.android_mvvm_architecture.bean.UserBean;
 import com.chiului.android_mvvm_architecture.data.LoginRepository;
+
+import okhttp3.ResponseBody;
+import retrofit2.HttpException;
 
 /**
  * 用户 ViewModel$
@@ -95,21 +95,31 @@ public class LoginViewModel extends ViewModel {
     public void login() {
         // 获取 token
         mRepository.getToken(getAccount().getValue(), getPassword().getValue())
+                // TODO: 1/16/21 神经大条蕾弟：还差请求预处理
         .subscribe(bean -> {
-
+            // 请求成功
             // 保存到账号 Repository
             mRepository.saveAccount(getAccount().getValue());
             // 保存到 Token 到 Repository（存储库）
-//            mRepository.saveUser(user);
-            // 登录成功
             String token = bean.getData();
+            mRepository.saveToken(token);
+            // 登录成功通知界面
             if (!TextUtils.isEmpty(token)) {
                 getToken().postValue(token);
             } else {
                 getToast().postValue(bean.getMsg());
             }
         }, throwable -> {
-            String message = throwable.getMessage();
+            // 请求失败
+            String message;
+            if (throwable instanceof HttpException) {
+                // 后台返回错误
+                ResponseBody responseBody = ((HttpException) throwable).response().errorBody();
+                message = responseBody.toString();
+            } else {
+                // 其他错误
+                message = throwable.getMessage();
+            }
             if (!TextUtils.isEmpty(message)) {
                 getToast().postValue(message);
             }

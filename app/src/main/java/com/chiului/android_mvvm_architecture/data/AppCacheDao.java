@@ -23,7 +23,7 @@ public interface AppCacheDao {
     @Delete
     void deleteAppCache(AppCacheBean cache);
 
-    @Query("SELECT * FROM app_cache WHERE appKey == :key")
+    @Query("SELECT * FROM app_cache WHERE `key` == :key")
     AppCacheBean getAppCache(String key);
 
 }

@@ -2,10 +2,16 @@ package com.chiului.android_mvvm_architecture.api
 
 import android.util.Log
 import com.chiului.android_mvvm_architecture.BuildConfig
+import com.chiului.android_mvvm_architecture.MyApplication
+import com.chiului.android_mvvm_architecture.data.AppDatabase
 import com.chiului.android_mvvm_architecture.utilities.AIP_BASE
+import com.chiului.android_mvvm_architecture.utilities.TOKEN
 import okhttp3.Interceptor
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
@@ -24,6 +30,7 @@ object BaseApiService {
         val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
                 if (BuildConfig.DEBUG) {
+                    // TODO: 1/16/21 神经大条蕾弟：还差日志工具类
                     Log.i("BaseApiService", message)
                 }
             }
@@ -38,7 +45,7 @@ object BaseApiService {
         val headerInterceptor = Interceptor { chain: Interceptor.Chain ->
             val original = chain.request()
             val requestBuilder: Request.Builder = original.newBuilder()
-                    .header("token", getToken()) // 添加 token 到请求头
+                    .header("token", getToken()) // 添加或替换 token 到请求头
             val request: Request = requestBuilder.build()
             chain.proceed(request)
         }
@@ -58,7 +65,13 @@ object BaseApiService {
     }
 
     private fun getToken(): String {
-        return ""
+        var appCache = AppDatabase.getInstance(MyApplication.ApplicationContext).appCacheDao().getAppCache(TOKEN)
+        return if(appCache == null) "" else appCache.value ?: ""
+    }
+
+    @JvmStatic
+    fun getJsonRequestBody(json: String): RequestBody {
+        return json.toRequestBody("application/json;charset=UTF-8".toMediaType())
     }
 
 }
