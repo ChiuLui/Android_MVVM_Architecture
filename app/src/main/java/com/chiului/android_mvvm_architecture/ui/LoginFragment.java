@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -34,7 +35,8 @@ public class LoginFragment extends BaseNavFragment implements View.OnClickListen
     private FragmentLoginBinding mBinding;
     private LoginViewModel mViewModel;
 
-    private Observer<String> observer;
+    private Observer<String> mObserverLogin;
+    private Observer<String> mObserverToast;
 
     @Override
     public int setContentViewID() {
@@ -66,13 +68,25 @@ public class LoginFragment extends BaseNavFragment implements View.OnClickListen
         /**
          * 登录成功
          */
-        if (observer == null) {
+        if (mObserverLogin == null) {
             // 防止重复订阅
-            observer = token -> {
+            mObserverLogin = token -> {
                 toMain();
             };
 
-            mViewModel.getToken().observe(this, observer);
+            mViewModel.getToken().observe(this, mObserverLogin);
+        }
+
+        /**
+         * 显示提示
+         */
+        if (mObserverToast == null) {
+            // 防止重复订阅
+            mObserverToast = toast -> {
+                Toast.makeText(getActivity(), toast, Toast.LENGTH_SHORT).show();
+            };
+
+            mViewModel.getToast().observe(this, mObserverToast);
         }
 
         return mBinding.getRoot();

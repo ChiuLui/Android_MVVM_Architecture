@@ -1,6 +1,8 @@
 package com.chiului.android_mvvm_architecture.viewmodel;
 
 import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -27,6 +29,11 @@ public class LoginViewModel extends ViewModel {
     private MutableLiveData<String> mToken;
 
     /**
+     * 提示
+     */
+    private MutableLiveData<String> mToast;
+
+    /**
      * 账号
      */
     private MutableLiveData<String> mAccount;
@@ -38,6 +45,13 @@ public class LoginViewModel extends ViewModel {
 
     public LoginViewModel(LoginRepository repository){
         mRepository = repository;
+    }
+
+    public MutableLiveData<String> getToast() {
+        if (mToast == null) {
+            mToast = new MutableLiveData<String>();
+        }
+        return mToast;
     }
 
     public MutableLiveData<String> getToken() {
@@ -79,14 +93,27 @@ public class LoginViewModel extends ViewModel {
      * 输入框的数据会及时反映到 LiveData ，但不会刷新界面
      */
     public void login() {
-        // 保存到账号 Repository
-        mRepository.saveAccount(getAccount().getValue());
         // 获取 token
-//        mRepository.getToken(getAccount().getValue(), getPassword().getValue());
-        // 保存到 Token 到 Repository（存储库）
-//        mRepository.saveUser(user);
-        // 登录成功
-        getToken().setValue("fsdlfsllfjljldj");
+        mRepository.getToken(getAccount().getValue(), getPassword().getValue())
+        .subscribe(bean -> {
+
+            // 保存到账号 Repository
+            mRepository.saveAccount(getAccount().getValue());
+            // 保存到 Token 到 Repository（存储库）
+//            mRepository.saveUser(user);
+            // 登录成功
+            String token = bean.getData();
+            if (!TextUtils.isEmpty(token)) {
+                getToken().postValue(token);
+            } else {
+                getToast().postValue(bean.getMsg());
+            }
+        }, throwable -> {
+            String message = throwable.getMessage();
+            if (!TextUtils.isEmpty(message)) {
+                getToast().postValue(message);
+            }
+        });
     }
 
 }

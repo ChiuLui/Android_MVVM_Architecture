@@ -19,6 +19,29 @@ public class UserBean {
     private String account;
     private String psw;
 
+//    private String id;
+//    private String avatar;
+//    private String banTime;
+//    private String idCardNo;
+//    private int marryStatus;
+//    private String mobile;
+//    private String password;
+//    private String realName;
+//    private String recordArea;
+//    private String recordDate;
+//    private String recordNo;
+//    private String recordOffice;
+//    private String recordSheng;
+//    private String recordShi;
+//    private String registerTime;
+//    private String salt;
+//    private int sex;
+//    private String spouseIdCardNo;
+//    private String spouseName;
+//    private String status;
+//    private String username;// 用户名
+//    private String nickName;// 昵称
+
     public String getId() {
         return id;
     }

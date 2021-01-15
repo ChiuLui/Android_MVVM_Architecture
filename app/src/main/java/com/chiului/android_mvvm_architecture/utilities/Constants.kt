@@ -14,4 +14,4 @@ const val DATABASE_NAME = "app-db"
 /**
  * 服务器地址
  */
-const val AIP_BASE = "https://kydev.dottmed.com/"
+const val AIP_BASE = "http://81.71.123.237:8888/"

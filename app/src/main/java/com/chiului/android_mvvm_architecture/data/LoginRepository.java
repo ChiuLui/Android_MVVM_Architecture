@@ -2,7 +2,13 @@ package com.chiului.android_mvvm_architecture.data;
 
 import com.chiului.android_mvvm_architecture.api.UserService;
 import com.chiului.android_mvvm_architecture.bean.AppCacheBean;
+import com.chiului.android_mvvm_architecture.bean.BaseBean;
 import com.chiului.android_mvvm_architecture.utilities.AppCacheConstantsKt;
+import com.google.gson.JsonObject;
+
+import io.reactivex.rxjava3.core.Single;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * 用户储存库$
@@ -45,6 +51,16 @@ public class LoginRepository {
         } else {
             return "";
         }
+    }
+
+    public Single<BaseBean<String>> getToken(String account, String psw){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("userName", account);
+        jsonObject.addProperty("password", psw);
+        String json = jsonObject.toString();
+        RequestBody requestBody = RequestBody.create(json, MediaType.parse("application/json; charset=UTF-8"));
+        Single<BaseBean<String>> single = mUserService.login(requestBody);
+        return single;
     }
 
 }
