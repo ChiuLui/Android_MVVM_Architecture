@@ -18,6 +18,7 @@ import com.chiului.android_mvvm_architecture.base.BaseNavFragment;
 import com.chiului.android_mvvm_architecture.databinding.FragmentLoginBinding;
 import com.chiului.android_mvvm_architecture.utilities.ConfigsKt;
 import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
+import com.chiului.android_mvvm_architecture.utilities.ToastUtil;
 import com.chiului.android_mvvm_architecture.viewmodel.LoginViewModel;
 
 import static com.chiului.android_mvvm_architecture.utilities.ConfigsKt.ACCOUNT_MAX_LENGTH;
@@ -83,7 +84,7 @@ public class LoginFragment extends BaseNavFragment implements View.OnClickListen
         if (mObserverToast == null) {
             // 防止重复订阅
             mObserverToast = toast -> {
-                Toast.makeText(getActivity(), toast, Toast.LENGTH_SHORT).show();
+                ToastUtil.INSTANCE.show(getActivity(), toast, Toast.LENGTH_SHORT);
             };
 
             mViewModel.getToast().observe(this, mObserverToast);

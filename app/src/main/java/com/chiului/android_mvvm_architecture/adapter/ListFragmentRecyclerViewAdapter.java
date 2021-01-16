@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
 import com.chiului.android_mvvm_architecture.databinding.ItemFragmentBinding;
+import com.chiului.android_mvvm_architecture.utilities.ToastUtil;
 
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class ListFragmentRecyclerViewAdapter extends ListAdapter<DummyItemBean, 
             binding.setBean(itemBean);
             // 绑定点击事件
             binding.setClickListener(view -> {
-                Toast.makeText(binding.getRoot().getContext(), itemBean.getContent(), Toast.LENGTH_SHORT).show();
+                ToastUtil.INSTANCE.show(binding.getRoot().getContext(), itemBean.getContent(), Toast.LENGTH_SHORT);
             });
         }
 

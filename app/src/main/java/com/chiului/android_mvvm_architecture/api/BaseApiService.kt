@@ -1,6 +1,5 @@
 package com.chiului.android_mvvm_architecture.api
 
-import android.util.Log
 import com.chiului.android_mvvm_architecture.BuildConfig
 import com.chiului.android_mvvm_architecture.MyApplication
 import com.chiului.android_mvvm_architecture.data.AppDatabase

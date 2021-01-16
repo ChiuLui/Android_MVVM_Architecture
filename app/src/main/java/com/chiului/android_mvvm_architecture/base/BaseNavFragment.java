@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.lifecycler.BaseLifecycle;
 import com.chiului.android_mvvm_architecture.utilities.ConfigsKt;
+import com.chiului.android_mvvm_architecture.utilities.ToastUtil;
+import com.chiului.android_mvvm_architecture.utilities.ToastUtilKt;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -98,7 +100,7 @@ public abstract class BaseNavFragment extends Fragment {
      */
     private void backExit() {
         if (System.currentTimeMillis() - mExitTime > ConfigsKt.BACK_EXIT) {
-            Toast.makeText(getActivity(), R.string.toast_back_exit, Toast.LENGTH_SHORT).show();
+            ToastUtil.INSTANCE.show(getActivity(), R.string.toast_back_exit, Toast.LENGTH_SHORT);
             mExitTime = System.currentTimeMillis();
         } else {
             getActivity().finish();

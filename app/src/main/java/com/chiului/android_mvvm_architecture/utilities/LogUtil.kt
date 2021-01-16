@@ -44,7 +44,7 @@ object LogUtil {
         if (mIsShow) Log.wtf(mTag, msg)
     }
 
-    fun log(level: Int, msg: String) {
+    fun log(level: Int = Log.INFO, msg: String) {
         when(level){
             Log.VERBOSE -> v(msg)
             Log.DEBUG -> d(msg)
