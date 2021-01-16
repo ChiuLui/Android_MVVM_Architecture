@@ -35,3 +35,8 @@ const val BACK_EXIT = 2000L
  * 是否游客模式（无需登录）
  */
 const val MODE_GUEST = false
+
+/**
+ * 日志打印 tag 名字
+ */
+const val LOG_TAG = "神经大条蕾弟"

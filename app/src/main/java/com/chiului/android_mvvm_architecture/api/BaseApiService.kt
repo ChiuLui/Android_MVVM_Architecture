@@ -6,6 +6,7 @@ import com.chiului.android_mvvm_architecture.MyApplication
 import com.chiului.android_mvvm_architecture.data.AppDatabase
 import com.chiului.android_mvvm_architecture.utilities.AIP_BASE
 import com.chiului.android_mvvm_architecture.utilities.TOKEN
+import com.chiului.android_mvvm_architecture.utilities.logI
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -30,8 +31,8 @@ object BaseApiService {
         val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
                 if (BuildConfig.DEBUG) {
-                    // TODO: 1/16/21 神经大条蕾弟：还差日志工具类
-                    Log.i("BaseApiService", message)
+                    // 打印
+                    message.logI()
                 }
             }
         }).apply {
