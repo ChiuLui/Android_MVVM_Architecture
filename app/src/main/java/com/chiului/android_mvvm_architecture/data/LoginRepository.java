@@ -3,7 +3,7 @@ package com.chiului.android_mvvm_architecture.data;
 import com.chiului.android_mvvm_architecture.api.BaseApiService;
 import com.chiului.android_mvvm_architecture.api.UserService;
 import com.chiului.android_mvvm_architecture.bean.AppCacheBean;
-import com.chiului.android_mvvm_architecture.bean.BaseBean;
+import com.chiului.android_mvvm_architecture.bean.ApiResult;
 import com.chiului.android_mvvm_architecture.utilities.AppCacheConstantsKt;
 import com.google.gson.JsonObject;
 
@@ -58,12 +58,12 @@ public class LoginRepository {
         mAppCacheDao.insertAppCache(appCacheBean);
     }
 
-    public Single<BaseBean<String>> getToken(String account, String psw){
+    public Single<ApiResult<String>> getToken(String account, String psw){
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("userName", account);
         jsonObject.addProperty("password", psw);
         RequestBody requestBody = BaseApiService.getJsonRequestBody(jsonObject.toString());
-        Single<BaseBean<String>> single = mUserService.login(requestBody);
+        Single<ApiResult<String>> single = mUserService.login(requestBody);
         return single;
     }
 

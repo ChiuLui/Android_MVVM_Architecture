@@ -1,6 +1,6 @@
 package com.chiului.android_mvvm_architecture.api
 
-import com.chiului.android_mvvm_architecture.bean.BaseBean
+import com.chiului.android_mvvm_architecture.bean.ApiResult
 import io.reactivex.rxjava3.core.Single
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -16,7 +16,7 @@ interface UserService {
     @POST("api/base/login/")
     fun login(
             @Body body: RequestBody
-    ): Single<BaseBean<String>>
+    ): Single<ApiResult<String>>
 
     // TODO: 1/16/21 神经大条蕾弟：还差请求个人信息接口
 
@@ -25,7 +25,7 @@ interface UserService {
 //    @POST("api/base/login/")
 //    suspend fun login(
 //            @Body body: RequestBody
-//    ): BaseBean<String>
+//    ): ApiResult<String>
 
     companion object {
 

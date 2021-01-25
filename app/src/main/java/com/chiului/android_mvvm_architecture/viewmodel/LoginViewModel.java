@@ -5,21 +5,13 @@ import android.text.TextUtils;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.chiului.android_mvvm_architecture.bean.BaseBean;
+import com.chiului.android_mvvm_architecture.bean.ApiResult;
 import com.chiului.android_mvvm_architecture.data.LoginRepository;
-import com.chiului.android_mvvm_architecture.retrofit.converter.ApiSubscriber;
-import com.chiului.android_mvvm_architecture.retrofit.converter.NetErrorException;
-import com.google.gson.Gson;
+import com.chiului.android_mvvm_architecture.retrofit.converter.ApiObserver;
+import com.chiului.android_mvvm_architecture.retrofit.converter.ApiException;
 
-import java.util.List;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-import okhttp3.ResponseBody;
-import retrofit2.HttpException;
 
 /**
  * 用户 ViewModel$
@@ -99,51 +91,6 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-//    /**
-//     * 因为采用 LiveData 与 DataBinding 双向绑定：
-//     * 输入框的数据会及时反映到 LiveData ，但不会刷新界面
-//     */
-//    public void login() {
-//        // 获取 token
-//        mRepository.getToken(getAccount().getValue(), getPassword().getValue())
-//                // TODO: 1/16/21 神经大条蕾弟：还差请求预处理
-//                .subscribe(bean -> {
-//                    // 请求成功
-//                    // 保存到账号 Repository
-//                    mRepository.saveAccount(getAccount().getValue());
-//                    // 保存到 Token 到 Repository（存储库）
-//                    String token = bean.getData();
-//                    mRepository.saveToken(token);
-//                    // 登录成功通知界面
-//                    if (!TextUtils.isEmpty(token)) {
-//                        getToken().postValue(token);
-//                    } else {
-//                        getToast().postValue(bean.getMsg());
-//                    }
-//                }, throwable -> {
-//                    // 请求失败
-//                    String message;
-//                    if (throwable instanceof HttpException) {
-//                        // 后台返回错误
-//                        ResponseBody responseBody = ((HttpException) throwable).response().errorBody();
-//                        String json = responseBody.string();
-//                        if (!TextUtils.isEmpty(json)) {
-//                            Gson gson = new Gson();
-//                            BaseBean baseBean = gson.fromJson(json, BaseBean.class);
-//                            message = baseBean.getMsg();
-//                        } else {
-//                            message = throwable.getMessage();
-//                        }
-//                    } else {
-//                        // 其他错误
-//                        message = throwable.getMessage();
-//                    }
-//                    if (!TextUtils.isEmpty(message)) {
-//                        getToast().postValue(message);
-//                    }
-//                });
-//    }
-
     /**
      * 因为采用 LiveData 与 DataBinding 双向绑定：
      * 输入框的数据会及时反映到 LiveData ，但不会刷新界面
@@ -151,9 +98,9 @@ public class LoginViewModel extends ViewModel {
     public void login() {
         // 获取 token
         mRepository.getToken(getAccount().getValue(), getPassword().getValue())
-                .subscribeWith(new ApiSubscriber<BaseBean<String>>() {
+                .subscribeWith(new ApiObserver<ApiResult<String>>() {
                     @Override
-                    protected void onFail(NetErrorException error) {
+                    protected void onFail(ApiException error) {
                         String message = error.getMessage();
                         if (!TextUtils.isEmpty(message)) {
                             getToast().postValue(message);
@@ -166,7 +113,7 @@ public class LoginViewModel extends ViewModel {
                     }
 
                     @Override
-                    public void onSuccess(@NonNull BaseBean<String> bean) {
+                    public void onSuccess(@NonNull ApiResult<String> bean) {
                         // 请求成功
                         // 保存到账号 Repository
                         mRepository.saveAccount(getAccount().getValue());

@@ -5,11 +5,11 @@ import android.text.TextUtils;
 import java.io.IOException;
 
 /**
- * 网络请求异常处理$
+ * 自定义网络请求异常$
  * @author    神经大条蕾弟
  * @date      2021/01/25 10:13
  */
-public class NetErrorException extends IOException {
+public class ApiException extends IOException {
 
     private int mCode;
     private String mMessage;
@@ -61,16 +61,21 @@ public class NetErrorException extends IOException {
     public static final int ERROR_CODE_CONNECT_EXCEPTION = 1005;
 
     /**
-     * 其他
+     * Gson 解析错误
+     */
+    public static final int ERROR_CODE_MALFORMED_JSON_EXCEPTION = 1006;
+
+    /**
+     * 其他（未知错误）
      */
     public static final int ERROR_CODE_OTHER = -999;
 
-    public NetErrorException(Throwable exception, int code) {
+    public ApiException(Throwable exception, int code) {
         this.mException = exception;
         this.mCode = code;
     }
 
-    public NetErrorException(String message, int code) {
+    public ApiException(String message, int code) {
         super(message);
         this.mCode = code;
         this.mMessage = message;
@@ -99,9 +104,15 @@ public class NetErrorException extends IOException {
                 return "网络连接超时";
             case ERROR_CODE_CONNECT_EXCEPTION:
                 return "无法连接到服务器，请检查网络连接后再试！";
+            case ERROR_CODE_MALFORMED_JSON_EXCEPTION:
+                return "Gson 解析错误：" + mException.getMessage();
             case ERROR_CODE_OTHER:
             default:
-                return mException.getMessage();
+                if (mException == null) {
+                    return "未知错误";
+                } else {
+                    return mException.getMessage();
+                }
         }
     }
 

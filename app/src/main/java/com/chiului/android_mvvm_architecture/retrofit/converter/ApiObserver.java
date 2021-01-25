@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.MalformedJsonException;
 
 import org.json.JSONException;
 
@@ -19,21 +20,22 @@ import okhttp3.ResponseBody;
 import retrofit2.HttpException;
 
 /**
- * 统一订阅管理
- *
- * @param <T> 泛型
+ * Single 订阅网络请求错误处理
+ * @author 神经大条蕾弟
+ * @param <T> 需要处理的类型
  */
-public abstract class ApiSubscriber<T> implements SingleObserver<T> {
+public abstract class ApiObserver<T> implements SingleObserver<T> {
 
     @Override
     public void onError(Throwable e) {
-        NetErrorException error;
+
+        ApiException error = null;
 
         if (e != null) {
 
             // 自定义抛出的错误进行解析
-            if (e instanceof NetErrorException) {
-                error = (NetErrorException) e;
+            if (e instanceof ApiException) {
+                error = (ApiException) e;
             } else if (e instanceof HttpException) {
                 // 后台返回错误
                 HttpException httpException = (HttpException) e;
@@ -71,26 +73,28 @@ public abstract class ApiSubscriber<T> implements SingleObserver<T> {
                     errorMeg = json;
                 }
 
-                error = new NetErrorException(errorMeg, code);
+                error = new ApiException(errorMeg, code);
 
             } else if (e instanceof UnknownHostException) {
-                error = new NetErrorException(e, NetErrorException.ERROR_CODE_UNKNOWN_HOST_EXCEPTION);
+                error = new ApiException(e, ApiException.ERROR_CODE_UNKNOWN_HOST_EXCEPTION);
             } else if (e instanceof JSONException || e instanceof JsonParseException) {
-                error = new NetErrorException(e, NetErrorException.ERROR_CODE_JSON_EXCEPTION);
+                error = new ApiException(e, ApiException.ERROR_CODE_JSON_EXCEPTION);
             } else if (e instanceof SSLHandshakeException) {
-                error = new NetErrorException(e, NetErrorException.ERROR_CODE_SSL_HANDSHAKE_EXCEPTION);
+                error = new ApiException(e, ApiException.ERROR_CODE_SSL_HANDSHAKE_EXCEPTION);
             }  else if (e instanceof SocketTimeoutException) {
-                error = new NetErrorException(e, NetErrorException.ERROR_CODE_SOCKET_TIMEOUT_EXCEPTION);
+                error = new ApiException(e, ApiException.ERROR_CODE_SOCKET_TIMEOUT_EXCEPTION);
             } else if (e instanceof ConnectException) {
-                error = new NetErrorException(e, NetErrorException.ERROR_CODE_CONNECT_EXCEPTION);
+                error = new ApiException(e, ApiException.ERROR_CODE_CONNECT_EXCEPTION);
+            }  else if (e instanceof MalformedJsonException) {
+                error = new ApiException(e, ApiException.ERROR_CODE_MALFORMED_JSON_EXCEPTION);
             } else {
-                error = new NetErrorException(e, NetErrorException.ERROR_CODE_OTHER);
+                error = new ApiException(e, ApiException.ERROR_CODE_OTHER);
             }
 
-        } else {
+        }
 
-            error = new NetErrorException(e, NetErrorException.ERROR_CODE_OTHER);
-
+        if (error == null){
+            error = new ApiException("", ApiException.ERROR_CODE_OTHER);
         }
 
         // 回调抽象方法
@@ -101,5 +105,5 @@ public abstract class ApiSubscriber<T> implements SingleObserver<T> {
     /**
      * 回调错误
      */
-    protected abstract void onFail(NetErrorException error);
+    protected abstract void onFail(ApiException error);
 }

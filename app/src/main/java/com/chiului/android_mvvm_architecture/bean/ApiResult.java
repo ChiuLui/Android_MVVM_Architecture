@@ -6,7 +6,7 @@ package com.chiului.android_mvvm_architecture.bean;
  * @author 神经大条蕾弟
  * @date 2021/01/15 10:37
  */
-public class BaseBean<T> {
+public class ApiResult<T> {
 
     /**
      * success : true

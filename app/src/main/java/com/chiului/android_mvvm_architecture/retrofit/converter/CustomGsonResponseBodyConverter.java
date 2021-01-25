@@ -31,19 +31,20 @@ final class CustomGsonResponseBodyConverter<T> implements Converter<ResponseBody
         // 请求成功对返回的数据进行预处理，根据具体情况而定。
         String jsonString = value.string();
         try {
-            JsonElement jsonElement = JsonParser.parseString(jsonString);
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
             JsonElement codeElement = jsonObject.get("code");
             int code = codeElement.getAsInt();
-            if (code != NetErrorException.SUCCEED_CODE) {
+            if (code != ApiException.SUCCEED_CODE) {
                 // 后台返回错误
                 // 获取错误描述
                 JsonElement msgElement = jsonObject.get("msg");
                 String message = msgElement.getAsString();
                 // 返回自定义错误
-                throw new NetErrorException(message, code);
+                throw new ApiException(message, code);
             }
-            return adapter.fromJson(jsonObject.get("data").getAsString());
+            // 如果请求成功-->解析对象返回
+            T result = adapter.fromJson(jsonString);
+            return result;
 
         } finally {
             value.close();
