@@ -3,6 +3,7 @@ package com.chiului.android_mvvm_architecture.api
 import com.chiului.android_mvvm_architecture.BuildConfig
 import com.chiului.android_mvvm_architecture.MyApplication
 import com.chiului.android_mvvm_architecture.data.AppDatabase
+import com.chiului.android_mvvm_architecture.retrofit.converter.CustomGsonConverterFactory
 import com.chiului.android_mvvm_architecture.utilities.AIP_BASE
 import com.chiului.android_mvvm_architecture.utilities.TOKEN
 import com.chiului.android_mvvm_architecture.utilities.logI
@@ -58,7 +59,8 @@ object BaseApiService {
         val builder: Retrofit.Builder = Retrofit.Builder()
                 .baseUrl(AIP_BASE) // 配置BaseUrl
                 .client(client) // 设置client
-                .addConverterFactory(GsonConverterFactory.create()) // gson转换器
+//                .addConverterFactory(GsonConverterFactory.create()) // gson转换器
+                .addConverterFactory(CustomGsonConverterFactory.create()) // 自定义 gson 转换器
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create()) // RxJava3 支持
 
         return builder.build()

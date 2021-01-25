@@ -27,9 +27,9 @@ public class MainRepository {
         private static final MainRepository Instance = new MainRepository();
     }
 
-    public UserBean getLocalUserInfo(String token){
+    public UserBean getLocalUserInfo(){
         // TODO: 1/13/21 神经大条蕾弟：从本地数据库获取用户信息
-        UserBean user = mAppCacheDao.getUser(token);
+        UserBean user = mAppCacheDao.getUser("token");
         return user;
     }
 

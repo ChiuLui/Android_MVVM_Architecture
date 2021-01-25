@@ -148,8 +148,8 @@ public class MainViewModel extends ViewModel {
     }
 
     public void getUserInfo() {
-        // TODO: 1/13/21 神经大条蕾弟：获取 token 然后去本地数据库查询用户信息
-        UserBean userInfo = mRepository.getLocalUserInfo("token");
+        // TODO: 去本地数据库查询用户信息
+        UserBean userInfo = mRepository.getLocalUserInfo();
         getUserInfoBean().setValue(userInfo);
     }
 
