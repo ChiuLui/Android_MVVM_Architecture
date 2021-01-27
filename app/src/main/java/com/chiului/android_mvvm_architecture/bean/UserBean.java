@@ -15,32 +15,23 @@ public class UserBean {
 
     @NonNull
     @PrimaryKey
+    private String token;
     private String id;
-    private String account;
-    private String psw;
+    private String avatar;
+    private String mobile;
+    private String username;// 用户名
+    private String realName;// 真实姓名
+    private String nickName;// 昵称
+    private int sex;
 
-//    private String id;
-//    private String avatar;
-//    private String banTime;
-//    private String idCardNo;
-//    private int marryStatus;
-//    private String mobile;
-//    private String password;
-//    private String realName;
-//    private String recordArea;
-//    private String recordDate;
-//    private String recordNo;
-//    private String recordOffice;
-//    private String recordSheng;
-//    private String recordShi;
-//    private String registerTime;
-//    private String salt;
-//    private int sex;
-//    private String spouseIdCardNo;
-//    private String spouseName;
-//    private String status;
-//    private String username;// 用户名
-//    private String nickName;// 昵称
+    @NonNull
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(@NonNull String token) {
+        this.token = token;
+    }
 
     public String getId() {
         return id;
@@ -50,19 +41,51 @@ public class UserBean {
         this.id = id;
     }
 
-    public String getAccount() {
-        return account;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public String getPsw() {
-        return psw;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setPsw(String psw) {
-        this.psw = psw;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 }

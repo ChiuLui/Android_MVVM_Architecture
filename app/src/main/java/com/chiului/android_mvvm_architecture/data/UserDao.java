@@ -33,7 +33,7 @@ public interface UserDao {
     @Query("SELECT * FROM user")
     LiveData<List<UserBean>> getUsers();
 
-    @Query("SELECT * FROM user WHERE id == :id")
-    UserBean getUser(String id);
+    @Query("SELECT * FROM user WHERE token == :token")
+    UserBean getUser(String token);
 
 }

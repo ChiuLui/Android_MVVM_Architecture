@@ -30,7 +30,9 @@ public final class InjectorUtils {
 
     private static final MainRepository getMainRepository(Context context) {
         return MainRepository.getInstance(
-                AppDatabase.getInstance(context.getApplicationContext()).userDao()
+                AppDatabase.getInstance(context.getApplicationContext()).userDao(),
+                AppDatabase.getInstance(context.getApplicationContext()).appCacheDao(),
+                UserService.create()
         );
     }
 

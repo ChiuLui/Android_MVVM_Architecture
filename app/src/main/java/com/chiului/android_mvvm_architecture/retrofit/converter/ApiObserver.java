@@ -15,7 +15,9 @@ import java.net.UnknownHostException;
 
 import javax.net.ssl.SSLHandshakeException;
 
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
 import okhttp3.ResponseBody;
 import retrofit2.HttpException;
 
@@ -99,11 +101,18 @@ public abstract class ApiObserver<T> implements SingleObserver<T> {
 
         // 回调抽象方法
         onFail(error);
+    }
+
+
+    @Override
+    public void onSubscribe(@NonNull Disposable d) {
 
     }
 
     /**
      * 回调错误
+     * @param error 自定义失败回调
      */
-    protected abstract void onFail(ApiException error);
+    protected abstract void onFail(@NonNull ApiException error);
+
 }

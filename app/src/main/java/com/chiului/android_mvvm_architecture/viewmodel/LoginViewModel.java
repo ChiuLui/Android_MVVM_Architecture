@@ -99,18 +99,6 @@ public class LoginViewModel extends ViewModel {
         // 获取 token
         mRepository.getToken(getAccount().getValue(), getPassword().getValue())
                 .subscribeWith(new ApiObserver<ApiResult<String>>() {
-                    @Override
-                    protected void onFail(ApiException error) {
-                        String message = error.getMessage();
-                        if (!TextUtils.isEmpty(message)) {
-                            getToast().postValue(message);
-                        }
-                    }
-
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
 
                     @Override
                     public void onSuccess(@NonNull ApiResult<String> bean) {
@@ -125,6 +113,14 @@ public class LoginViewModel extends ViewModel {
                             getToken().postValue(token);
                         } else {
                             getToast().postValue(bean.getMsg());
+                        }
+                    }
+
+                    @Override
+                    protected void onFail(ApiException error) {
+                        String message = error.getMessage();
+                        if (!TextUtils.isEmpty(message)) {
+                            getToast().postValue(message);
                         }
                     }
                 });

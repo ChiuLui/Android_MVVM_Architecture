@@ -3,10 +3,13 @@ package com.chiului.android_mvvm_architecture.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.chiului.android_mvvm_architecture.bean.ApiResult;
 import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
 import com.chiului.android_mvvm_architecture.bean.UserBean;
 import com.chiului.android_mvvm_architecture.data.MainRepository;
 import com.chiului.android_mvvm_architecture.dummy.DummyContent;
+import com.chiului.android_mvvm_architecture.retrofit.converter.ApiException;
+import com.chiului.android_mvvm_architecture.retrofit.converter.ApiObserver;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,6 +35,11 @@ public class MainViewModel extends ViewModel {
     private MainRepository mRepository;
 
     /**
+     * 消息提示
+     */
+    private MutableLiveData<String> mToast;
+
+    /**
      * 用户信息
      */
     private MutableLiveData<UserBean> mUserInfoBean;
@@ -53,6 +61,13 @@ public class MainViewModel extends ViewModel {
 
     public MainViewModel(MainRepository repository){
         mRepository = repository;
+    }
+
+    public MutableLiveData<String> getToast() {
+        if (mToast == null) {
+            mToast = new MutableLiveData<String>();
+        }
+        return mToast;
     }
 
     public MutableLiveData<UserBean> getUserInfoBean() {
@@ -148,13 +163,29 @@ public class MainViewModel extends ViewModel {
     }
 
     public void getUserInfo() {
-        // TODO: 去本地数据库查询用户信息
+        // 去本地数据库查询用户信息
         UserBean userInfo = mRepository.getLocalUserInfo();
-        getUserInfoBean().setValue(userInfo);
+        if (userInfo != null) {
+            getUserInfoBean().postValue(userInfo);
+        }
     }
 
     public void initUserInfo(){
-        mRepository.getRemoteUserInfo();
+        mRepository.getRemoteUserInfo()
+                .subscribeWith(new ApiObserver<ApiResult<UserBean>>() {
+                    @Override
+                    public void onSuccess(@NonNull ApiResult<UserBean> userBeanApiResult) {
+                        // 保存用户信息到本地数据库
+                        mRepository.saveUserInfo(userBeanApiResult.getData());
+                        // 从本地查询用户信息并推送到界面
+                        getUserInfo();
+                    }
+
+                    @Override
+                    public void onFail(@NonNull ApiException error) {
+                        getToast().postValue(error.getMessage());
+                    }
+                });
     }
 
 }

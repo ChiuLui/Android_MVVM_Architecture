@@ -3,6 +3,7 @@ package com.chiului.android_mvvm_architecture.ui;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -13,6 +14,7 @@ import com.chiului.android_mvvm_architecture.adapter.MainAdapter;
 import com.chiului.android_mvvm_architecture.base.BaseNavFragment;
 import com.chiului.android_mvvm_architecture.databinding.FragmentMainBinding;
 import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
+import com.chiului.android_mvvm_architecture.utilities.ToastUtil;
 import com.chiului.android_mvvm_architecture.viewmodel.MainViewModel;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -36,6 +38,15 @@ public class MainFragment extends BaseNavFragment {
         mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false);
         mBinding.setLifecycleOwner(this);
         mViewModel = new ViewModelProvider(this, InjectorUtils.provideMainViewModelFactory(getActivity())).get(MainViewModel.class);
+
+        mViewModel.getToast().observe(this, msg -> {
+            ToastUtil.INSTANCE.show(getActivity(), msg, Toast.LENGTH_SHORT);
+        });
+
+        mViewModel.getUserInfoBean().observe(this, userBean -> {
+            mViewModel.getToast().setValue(userBean.getNickName());
+        });
+
         return mBinding.getRoot();
     }
 

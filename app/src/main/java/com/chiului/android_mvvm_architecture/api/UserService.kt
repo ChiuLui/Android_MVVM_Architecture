@@ -1,6 +1,7 @@
 package com.chiului.android_mvvm_architecture.api
 
 import com.chiului.android_mvvm_architecture.bean.ApiResult
+import com.chiului.android_mvvm_architecture.bean.UserBean
 import io.reactivex.rxjava3.core.Single
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -13,21 +14,11 @@ import retrofit2.http.POST
  */
 interface UserService {
 
-    @POST("api/base/login/")
-    fun login(
-            @Body body: RequestBody
-    ): Single<ApiResult<String>>
-
-    // TODO: 1/16/21 神经大条蕾弟：还差请求个人信息接口
-
-    // TODO: 1/16/21 神经大条蕾弟：还差退出登录接口
-//    @Headers("Content-type:application/json;charset=UTF-8")
-//    @POST("api/base/login/")
-//    suspend fun login(
-//            @Body body: RequestBody
-//    ): ApiResult<String>
-
     companion object {
+
+        const val API_LOGIN = "api/base/login/"
+
+        const val API_USER_INFO = "api/base/memberInfo/"
 
         @JvmStatic
         fun create(): UserService {
@@ -35,5 +26,13 @@ interface UserService {
         }
 
     }
+
+    @POST(API_LOGIN)
+    fun login(
+            @Body body: RequestBody
+    ): Single<ApiResult<String>>
+
+    @POST(API_USER_INFO)
+    fun getUserInfo(): Single<ApiResult<UserBean>>
 
 }
