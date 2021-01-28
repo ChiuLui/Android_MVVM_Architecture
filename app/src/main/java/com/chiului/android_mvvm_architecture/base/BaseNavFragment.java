@@ -16,7 +16,6 @@ import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.lifecycler.BaseLifecycle;
 import com.chiului.android_mvvm_architecture.utilities.ConfigsKt;
 import com.chiului.android_mvvm_architecture.utilities.ToastUtil;
-import com.chiului.android_mvvm_architecture.utilities.ToastUtilKt;
 
 import org.jetbrains.annotations.NotNull;
 
