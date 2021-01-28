@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.chiului.android_mvvm_architecture.ui.HomeFragment;
-import com.chiului.android_mvvm_architecture.ui.Module4Fragment;
+import com.chiului.android_mvvm_architecture.ui.ListSampleFragment;
 
 /**
  * 主页的 ViewPager 2 适配器$
@@ -28,7 +28,7 @@ public class MainAdapter extends FragmentStateAdapter {
         Fragment fragment;
         switch (position){
             case 3:
-                fragment = Module4Fragment.newInstance();
+                fragment = ListSampleFragment.newInstance();
                 break;
             case 2:
             case 1:

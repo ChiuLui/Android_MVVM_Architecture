@@ -11,7 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.adapter.Module4Adapter;
 import com.chiului.android_mvvm_architecture.base.BaseFragment;
-import com.chiului.android_mvvm_architecture.databinding.FragmentModule4Binding;
+import com.chiului.android_mvvm_architecture.databinding.FragmentListSampleBinding;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 /**
@@ -19,20 +19,20 @@ import com.google.android.material.tabs.TabLayoutMediator;
  * @author 神经大条蕾弟
  * @date   2020/09/28 16:59
  */
-public class Module4Fragment extends BaseFragment {
+public class ListSampleFragment extends BaseFragment {
 
-    private FragmentModule4Binding mBinding;
+    private FragmentListSampleBinding mBinding;
 
-    public Module4Fragment() {}
+    public ListSampleFragment() {}
 
-    public static Module4Fragment newInstance() {
-        Module4Fragment fragment = new Module4Fragment();
+    public static ListSampleFragment newInstance() {
+        ListSampleFragment fragment = new ListSampleFragment();
         return fragment;
     }
 
     @Override
     public int setContentViewID() {
-        return R.layout.fragment_module4;
+        return R.layout.fragment_list_sample;
     }
 
     @Override

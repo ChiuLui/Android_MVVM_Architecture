@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.Module4Fragment">
+    tools:context=".ui.ListSampleFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_layout"
@@ -51,7 +51,6 @@
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-            <!-- Override tabIconTint attribute of style with selector -->
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
