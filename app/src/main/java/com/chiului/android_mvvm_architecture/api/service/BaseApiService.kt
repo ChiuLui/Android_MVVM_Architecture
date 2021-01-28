@@ -1,9 +1,9 @@
 package com.chiului.android_mvvm_architecture.api.service
 
 import com.chiului.android_mvvm_architecture.BuildConfig
-import com.chiului.android_mvvm_architecture.MyApplication
-import com.chiului.android_mvvm_architecture.data.AppDatabase
+import com.chiului.android_mvvm_architecture.MainApplication
 import com.chiului.android_mvvm_architecture.api.converter.CustomGsonConverterFactory
+import com.chiului.android_mvvm_architecture.data.AppDatabase
 import com.chiului.android_mvvm_architecture.utilities.AIP_BASE
 import com.chiului.android_mvvm_architecture.utilities.TOKEN
 import com.chiului.android_mvvm_architecture.utilities.logI
@@ -66,7 +66,7 @@ object BaseApiService {
     }
 
     private fun getToken(): String {
-        var appCache = AppDatabase.getInstance(MyApplication.ApplicationContext).appCacheDao().getAppCache(TOKEN)
+        var appCache = AppDatabase.getInstance(MainApplication.context).appCacheDao().getAppCache(TOKEN)
         return if(appCache == null) "" else appCache.value ?: ""
     }
 
