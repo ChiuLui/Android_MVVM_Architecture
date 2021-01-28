@@ -2,7 +2,7 @@ package com.chiului.android_mvvm_architecture.utilities;
 
 import android.content.Context;
 
-import com.chiului.android_mvvm_architecture.api.UserService;
+import com.chiului.android_mvvm_architecture.api.service.UserService;
 import com.chiului.android_mvvm_architecture.data.AppDatabase;
 import com.chiului.android_mvvm_architecture.data.MainRepository;
 import com.chiului.android_mvvm_architecture.data.LoginRepository;

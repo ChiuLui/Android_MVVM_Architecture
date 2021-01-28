@@ -1,7 +1,7 @@
 package com.chiului.android_mvvm_architecture.data;
 
 
-import com.chiului.android_mvvm_architecture.api.UserService;
+import com.chiului.android_mvvm_architecture.api.service.UserService;
 import com.chiului.android_mvvm_architecture.bean.ApiResult;
 import com.chiului.android_mvvm_architecture.bean.AppCacheBean;
 import com.chiului.android_mvvm_architecture.bean.UserBean;

@@ -1,4 +1,4 @@
-package com.chiului.android_mvvm_architecture.retrofit.converter;
+package com.chiului.android_mvvm_architecture.api.converter;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;

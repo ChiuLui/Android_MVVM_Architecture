@@ -1,5 +1,6 @@
-package com.chiului.android_mvvm_architecture.retrofit.converter;
+package com.chiului.android_mvvm_architecture.api.converter;
 
+import com.chiului.android_mvvm_architecture.api.exception.ApiException;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

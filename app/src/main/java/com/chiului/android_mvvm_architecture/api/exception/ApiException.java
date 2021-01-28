@@ -1,4 +1,4 @@
-package com.chiului.android_mvvm_architecture.retrofit.converter;
+package com.chiului.android_mvvm_architecture.api.exception;
 
 import android.text.TextUtils;
 

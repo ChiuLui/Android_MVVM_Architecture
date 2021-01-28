@@ -1,9 +1,9 @@
-package com.chiului.android_mvvm_architecture.api
+package com.chiului.android_mvvm_architecture.api.service
 
 import com.chiului.android_mvvm_architecture.BuildConfig
 import com.chiului.android_mvvm_architecture.MyApplication
 import com.chiului.android_mvvm_architecture.data.AppDatabase
-import com.chiului.android_mvvm_architecture.retrofit.converter.CustomGsonConverterFactory
+import com.chiului.android_mvvm_architecture.api.converter.CustomGsonConverterFactory
 import com.chiului.android_mvvm_architecture.utilities.AIP_BASE
 import com.chiului.android_mvvm_architecture.utilities.TOKEN
 import com.chiului.android_mvvm_architecture.utilities.logI
@@ -16,7 +16,6 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * 获取 Retorfit Service$

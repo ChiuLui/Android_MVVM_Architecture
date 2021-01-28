@@ -8,8 +8,8 @@ import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
 import com.chiului.android_mvvm_architecture.bean.UserBean;
 import com.chiului.android_mvvm_architecture.data.MainRepository;
 import com.chiului.android_mvvm_architecture.dummy.DummyContent;
-import com.chiului.android_mvvm_architecture.retrofit.converter.ApiException;
-import com.chiului.android_mvvm_architecture.retrofit.converter.ApiObserver;
+import com.chiului.android_mvvm_architecture.api.exception.ApiException;
+import com.chiului.android_mvvm_architecture.api.observer.ApiObserver;
 
 import java.util.ArrayList;
 import java.util.Collections;

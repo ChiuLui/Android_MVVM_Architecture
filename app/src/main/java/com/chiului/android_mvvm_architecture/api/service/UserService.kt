@@ -1,4 +1,4 @@
-package com.chiului.android_mvvm_architecture.api
+package com.chiului.android_mvvm_architecture.api.service
 
 import com.chiului.android_mvvm_architecture.bean.ApiResult
 import com.chiului.android_mvvm_architecture.bean.UserBean

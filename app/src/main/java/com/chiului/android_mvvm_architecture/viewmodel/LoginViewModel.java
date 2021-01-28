@@ -7,11 +7,10 @@ import androidx.lifecycle.ViewModel;
 
 import com.chiului.android_mvvm_architecture.bean.ApiResult;
 import com.chiului.android_mvvm_architecture.data.LoginRepository;
-import com.chiului.android_mvvm_architecture.retrofit.converter.ApiObserver;
-import com.chiului.android_mvvm_architecture.retrofit.converter.ApiException;
+import com.chiului.android_mvvm_architecture.api.observer.ApiObserver;
+import com.chiului.android_mvvm_architecture.api.exception.ApiException;
 
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
  * 用户 ViewModel$
