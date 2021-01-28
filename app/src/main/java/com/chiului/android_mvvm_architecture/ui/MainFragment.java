@@ -37,7 +37,7 @@ public class MainFragment extends BaseNavFragment {
     public View initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container) {
         mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false);
         mBinding.setLifecycleOwner(this);
-        mViewModel = new ViewModelProvider(this, InjectorUtils.provideMainViewModelFactory(getActivity())).get(MainViewModel.class);
+        mViewModel = new ViewModelProvider(this, InjectorUtils.INSTANCE.provideMainViewModelFactory(getActivity())).get(MainViewModel.class);
 
         mViewModel.getToast().observe(this, msg -> {
             ToastUtil.INSTANCE.show(getActivity(), msg, Toast.LENGTH_SHORT);

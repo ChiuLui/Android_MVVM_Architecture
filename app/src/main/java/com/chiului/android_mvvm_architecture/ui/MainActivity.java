@@ -29,7 +29,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initViewModel() {
         mBinding = getDataBinding(ActivityMainBinding.class);
-        mViewModel = new ViewModelProvider(this, InjectorUtils.provideMainViewModelFactory(this)).get(MainViewModel.class);
+        mViewModel = new ViewModelProvider(this, InjectorUtils.INSTANCE.provideMainViewModelFactory(this)).get(MainViewModel.class);
         mBinding.setLifecycleOwner(this);
     }
 

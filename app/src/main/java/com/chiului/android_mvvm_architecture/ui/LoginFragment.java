@@ -47,7 +47,7 @@ public class LoginFragment extends BaseNavFragment implements View.OnClickListen
     @Override
     public View initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container) {
         mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false);
-        mViewModel = new ViewModelProvider(this, InjectorUtils.provideLoginViewModelFactory(getActivity())).get(LoginViewModel.class);
+        mViewModel = new ViewModelProvider(this, InjectorUtils.INSTANCE.provideLoginViewModelFactory(getActivity())).get(LoginViewModel.class);
         mBinding.setLifecycleOwner(this);
         mBinding.setLoginModel(mViewModel);
         mBinding.setClickListener(this);
