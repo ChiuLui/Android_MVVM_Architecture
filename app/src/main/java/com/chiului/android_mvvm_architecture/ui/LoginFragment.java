@@ -96,6 +96,8 @@ public class LoginFragment extends BaseNavFragment implements View.OnClickListen
     @Override
     public void initView() {
         setTopStack(!ConfigsKt.MODE_GUEST);
+
+        mViewModel.loadBeforeAccount();
     }
 
     private void checkLogin() {

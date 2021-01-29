@@ -40,11 +40,11 @@ public class LoginRepository {
         private static final LoginRepository Instance = new LoginRepository();
     }
 
-    public void saveAccount(String account){
+    public void saveBeforeAccount(String account){
         mAppCacheDao.insertAppCache(new AppCacheBean(AppCacheConstantsKt.ACCOUNT_BEFORE, account));
     }
 
-    public String getAccount(){
+    public String getBeforeAccount(){
         AppCacheBean appCache = mAppCacheDao.getAppCache(AppCacheConstantsKt.ACCOUNT_BEFORE);
         if (appCache != null) {
             return appCache.getValue();
