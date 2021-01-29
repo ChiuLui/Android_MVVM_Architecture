@@ -48,7 +48,7 @@ class LoginViewModel internal constructor(
      * 注意：您必须调用 setValue(T) 方法以从主线程更新 LiveData 对象。如果在 worker 线程中执行代码，则您可以改用 postValue(T) 方法来更新 LiveData 对象。
      */
     fun loadBeforeAccount() {
-        val beforeAccount = repository.beforeAccount
+        val beforeAccount = repository.getBeforeAccount()
         if (!beforeAccount.isNullOrBlank()) {
             this.account.value = beforeAccount
         }
