@@ -28,8 +28,8 @@ object InjectorUtils {
 
     private fun getMainRepository(context: Context): MainRepository {
         return MainRepository.getInstance(
-                AppDatabase.getInstance(context.applicationContext).userDao(),
                 AppDatabase.getInstance(context.applicationContext).appCacheDao(),
+                AppDatabase.getInstance(context.applicationContext).userDao(),
                 UserService.create()
         )
     }

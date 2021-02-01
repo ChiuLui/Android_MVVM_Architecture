@@ -91,7 +91,7 @@ class MainViewModel internal constructor(
     }
 
     fun initUserInfo() {
-        repository.remoteUserInfo
+        repository.getRemoteUserInfo()
                 .subscribeWith(object : ApiObserver<ApiResult<UserBean>>() {
                     override fun onSuccess(apiResult: ApiResult<UserBean>) {
                         // 保存用户信息到本地数据库
@@ -109,7 +109,7 @@ class MainViewModel internal constructor(
 
     fun getUserInfo() {
         // 去本地数据库查询用户信息
-        val userInfo: UserBean = repository.localUserInfo
+        val userInfo: UserBean = repository.getLocalUserInfo()
         userInfoBean.postValue(userInfo)
     }
 
