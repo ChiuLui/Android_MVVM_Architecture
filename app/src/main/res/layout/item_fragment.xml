@@ -7,7 +7,7 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="bean"
-            type="com.chiului.android_mvvm_architecture.bean.DummyItemBean"/>
+            type="com.chiului.android_mvvm_architecture.dummy.DummyItemBean"/>
     </data>
 
     <LinearLayout

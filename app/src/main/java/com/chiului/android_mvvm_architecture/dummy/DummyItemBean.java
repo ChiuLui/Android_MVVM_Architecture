@@ -1,4 +1,4 @@
-package com.chiului.android_mvvm_architecture.bean;
+package com.chiului.android_mvvm_architecture.dummy;
 
 /**
  * 假 item 数据实体类$

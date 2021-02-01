@@ -1,7 +1,5 @@
 package com.chiului.android_mvvm_architecture.dummy;
 
-import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

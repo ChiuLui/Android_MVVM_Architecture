@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.chiului.android_mvvm_architecture.api.exception.ApiException
 import com.chiului.android_mvvm_architecture.api.observer.ApiObserver
 import com.chiului.android_mvvm_architecture.bean.ApiResult
-import com.chiului.android_mvvm_architecture.bean.DummyItemBean
+import com.chiului.android_mvvm_architecture.dummy.DummyItemBean
 import com.chiului.android_mvvm_architecture.bean.UserBean
 import com.chiului.android_mvvm_architecture.data.MainRepository
 import com.chiului.android_mvvm_architecture.dummy.DummyContent

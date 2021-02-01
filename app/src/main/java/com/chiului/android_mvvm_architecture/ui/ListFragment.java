@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chiului.android_mvvm_architecture.R;
 import com.chiului.android_mvvm_architecture.adapter.ListFragmentRecyclerViewAdapter;
 import com.chiului.android_mvvm_architecture.base.BaseFragment;
-import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
+import com.chiului.android_mvvm_architecture.dummy.DummyItemBean;
 import com.chiului.android_mvvm_architecture.databinding.FragmentListBinding;
 import com.chiului.android_mvvm_architecture.utilities.InjectorUtils;
 import com.chiului.android_mvvm_architecture.viewmodel.MainViewModel;

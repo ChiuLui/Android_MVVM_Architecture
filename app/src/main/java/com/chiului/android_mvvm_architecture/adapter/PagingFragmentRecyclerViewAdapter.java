@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chiului.android_mvvm_architecture.bean.DummyItemBean;
+import com.chiului.android_mvvm_architecture.dummy.DummyItemBean;
 import com.chiului.android_mvvm_architecture.databinding.ItemFragmentBinding;
 import com.chiului.android_mvvm_architecture.utilities.ToastUtil;
 
