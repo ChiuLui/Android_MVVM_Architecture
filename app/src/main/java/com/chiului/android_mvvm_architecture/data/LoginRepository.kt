@@ -35,8 +35,8 @@ class LoginRepository private constructor(
     }
 
     fun getBeforeAccount(): String {
-        val appCache: AppCacheBean = appCacheDao.getAppCache(ACCOUNT_BEFORE)
-        return appCache.value
+        val appCache: AppCacheBean? = appCacheDao.getAppCache(ACCOUNT_BEFORE)
+        return if (appCache == null) "" else appCache.value
     }
 
     fun saveToken(token: String?) {

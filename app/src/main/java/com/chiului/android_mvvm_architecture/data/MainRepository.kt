@@ -31,9 +31,11 @@ class MainRepository private constructor(val appCacheDao: AppCacheDao, val userD
      * @param bean
      */
     fun saveUserInfo(bean: UserBean) {
-        val tokenCache: AppCacheBean = appCacheDao.getAppCache(TOKEN)
-        bean.token = tokenCache.value
-        userDao.insertUser(bean)
+        val tokenCache: AppCacheBean? = appCacheDao.getAppCache(TOKEN)
+        if (tokenCache != null) {
+            bean.token = tokenCache.value
+            userDao.insertUser(bean)
+        }
     }
 
     /**
@@ -41,8 +43,8 @@ class MainRepository private constructor(val appCacheDao: AppCacheDao, val userD
      * @return
      */
     fun getLocalUserInfo(): UserBean {
-        val tokenCache: AppCacheBean = appCacheDao.getAppCache(TOKEN)
-        return userDao.getUser(tokenCache.value)
+        val tokenCache: AppCacheBean? = appCacheDao.getAppCache(TOKEN)
+        return userDao.getUser(if (tokenCache == null) "" else tokenCache.value)
     }
 
     /**
