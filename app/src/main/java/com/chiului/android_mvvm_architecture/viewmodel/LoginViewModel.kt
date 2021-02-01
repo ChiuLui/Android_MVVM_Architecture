@@ -65,9 +65,9 @@ class LoginViewModel internal constructor(
                         // 请求成功
                         var data = apiResult?.data
                         // 保存到账号 Repository
-                        repository.saveBeforeAccount(account.value)
+                        repository.saveBeforeAccount(account.value ?: "")
                         // 保存到 Token 到 Repository（存储库）
-                        repository.saveToken(data)
+                        repository.saveToken(data ?: "")
                         // 登录成功通知界面
                         if (data.isNullOrBlank()) {
                             toast.postValue(apiResult?.msg)

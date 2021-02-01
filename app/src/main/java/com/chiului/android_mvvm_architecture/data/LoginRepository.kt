@@ -30,7 +30,7 @@ class LoginRepository private constructor(
                 }
     }
 
-    fun saveBeforeAccount(account: String?) {
+    fun saveBeforeAccount(account: String) {
         appCacheDao.insertAppCache(AppCacheBean(ACCOUNT_BEFORE, account))
     }
 
@@ -39,7 +39,7 @@ class LoginRepository private constructor(
         return if (appCache == null) "" else appCache.value
     }
 
-    fun saveToken(token: String?) {
+    fun saveToken(token: String) {
         val appCacheBean = AppCacheBean(TOKEN, token)
         appCacheDao.insertAppCache(appCacheBean)
     }
