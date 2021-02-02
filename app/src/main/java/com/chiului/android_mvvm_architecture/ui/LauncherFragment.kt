@@ -18,15 +18,15 @@ import kotlinx.coroutines.*
  */
 class LauncherFragment : BaseNavFragment() {
 
-    private lateinit var mRootView: FragmentLauncherBinding
+    private lateinit var binding: FragmentLauncherBinding
 
     override fun setContentViewID(): Int {
         return R.layout.fragment_launcher
     }
 
     override fun initViewModel(inflater: LayoutInflater, layoutId: Int, container: ViewGroup): View {
-        mRootView = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        return mRootView.root
+        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        return binding.root
     }
 
     override fun initView() {
