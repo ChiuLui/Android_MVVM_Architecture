@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -21,7 +22,9 @@ import com.chiului.android_mvvm_architecture.viewmodel.LoginViewModel
 class LoginFragment: BaseNavFragment(), View.OnClickListener {
 
     lateinit var binding: FragmentLoginBinding
-    lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModels {
+        InjectorUtils.provideLoginViewModelFactory(requireContext())
+    }
 
     override fun setContentViewID(): Int {
         return R.layout.fragment_login
@@ -29,7 +32,6 @@ class LoginFragment: BaseNavFragment(), View.OnClickListener {
 
     override fun initViewModel(inflater: LayoutInflater, layoutId: Int, container: ViewGroup): View {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        viewModel = ViewModelProvider(this, InjectorUtils.provideLoginViewModelFactory(requireContext())).get(LoginViewModel::class.java)
         binding.lifecycleOwner = this
         binding.loginModel = viewModel
         binding.clickListener = this

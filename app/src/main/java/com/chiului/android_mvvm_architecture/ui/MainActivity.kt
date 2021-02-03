@@ -1,7 +1,8 @@
 package com.chiului.android_mvvm_architecture.ui
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
 import com.chiului.android_mvvm_architecture.R
 import com.chiului.android_mvvm_architecture.base.BaseActivity
 import com.chiului.android_mvvm_architecture.databinding.ActivityMainBinding
@@ -15,14 +16,17 @@ import com.chiului.android_mvvm_architecture.viewmodel.MainViewModel
  */
 class MainActivity : BaseActivity() {
 
+    lateinit var binding: ActivityMainBinding
+    private val viewModel: MainViewModel by viewModels{
+        InjectorUtils.provideMainViewModelFactory(this)
+    }
+
     override fun setContentViewID(): Int {
         return R.layout.activity_main
     }
 
-    override fun initViewModel() {
-        var binding = getDataBinding(ActivityMainBinding::class.java)
-        var viewModel = ViewModelProvider(this, InjectorUtils.provideMainViewModelFactory(this)).get(MainViewModel::class.java)
-        binding.lifecycleOwner = this
+    override fun initViewModel(layoutId: Int) {
+        binding = DataBindingUtil.setContentView(this, layoutId)
     }
 
     override fun onCreating(savedInstanceState: Bundle?) {}
