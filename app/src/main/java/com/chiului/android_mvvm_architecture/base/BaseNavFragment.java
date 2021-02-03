@@ -51,10 +51,11 @@ public abstract class BaseNavFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         getLifecycle().addObserver(new BaseLifecycle());
         initBaseWidget();
-        mRootView = initViewModel(inflater, setContentViewID(), container);
+        mRootView = initViewModel(inflater, container, savedInstanceState);
         return mRootView;
     }
 
@@ -62,7 +63,7 @@ public abstract class BaseNavFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initBackPressDispatcher();
-        initView();
+        initView(view, savedInstanceState);
     }
 
     /**
@@ -123,22 +124,17 @@ public abstract class BaseNavFragment extends Fragment {
     public void initBundle(@NotNull Bundle bundle) {}
 
     /**
-     * @return 布局文件ID
-     */
-    public abstract @LayoutRes int setContentViewID();
-
-    /**
      * 初始化 ViewModel
      * @param inflater
-     * @param layoutId
      * @param container
+     * @param savedInstanceState
      * @return  碎片根布局
      */
-    public abstract View initViewModel( @NonNull LayoutInflater inflater, @NonNull int layoutId, @NonNull ViewGroup container);
+    public abstract View initViewModel(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 
     /**
      * 初始化 View
      */
-    public abstract void initView();
+    public abstract void initView(@NonNull View view, @Nullable Bundle savedInstanceState);
 
 }

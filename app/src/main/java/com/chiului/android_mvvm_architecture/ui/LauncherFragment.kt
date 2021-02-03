@@ -1,5 +1,6 @@
 package com.chiului.android_mvvm_architecture.ui
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,16 +21,12 @@ class LauncherFragment : BaseNavFragment() {
 
     private lateinit var binding: FragmentLauncherBinding
 
-    override fun setContentViewID(): Int {
-        return R.layout.fragment_launcher
-    }
-
-    override fun initViewModel(inflater: LayoutInflater, layoutId: Int, container: ViewGroup): View {
-        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+    override fun initViewModel(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_launcher, container, false)
         return binding.root
     }
 
-    override fun initView() {
+    override fun initView(view: View, savedInstanceState: Bundle?) {
         GlobalScope.launch(Dispatchers.Main) {
             startDelay()
             if (MODE_GUEST) {
