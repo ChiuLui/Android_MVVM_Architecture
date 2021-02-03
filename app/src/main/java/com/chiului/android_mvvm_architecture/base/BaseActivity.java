@@ -28,7 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getLifecycle().addObserver(new BaseLifecycle());
         initBaseWidget();
-        initViewModel(setContentViewID());
+        initViewModel();
         onCreating(savedInstanceState);
     }
 
@@ -104,14 +104,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void initBundle(Bundle bundle) {}
 
     /**
-     * @return 布局文件ID
+     * 初始化 ViewModel 与 DataViewBinding
+     *
+     * val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
      */
-    public abstract @LayoutRes int setContentViewID();
-
-    /**
-     * 初始化 ViewModel
-     */
-    public abstract void initViewModel(int layoutId);
+    public abstract void initViewModel();
 
     /**
      * 初始化操作

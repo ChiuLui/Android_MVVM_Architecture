@@ -21,12 +21,8 @@ class MainActivity : BaseActivity() {
         InjectorUtils.provideMainViewModelFactory(this)
     }
 
-    override fun setContentViewID(): Int {
-        return R.layout.activity_main
-    }
-
-    override fun initViewModel(layoutId: Int) {
-        binding = DataBindingUtil.setContentView(this, layoutId)
+    override fun initViewModel() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
 
     override fun onCreating(savedInstanceState: Bundle?) {}
