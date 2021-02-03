@@ -16,13 +16,14 @@ import com.chiului.android_mvvm_architecture.viewmodel.MainViewModel
  */
 class MainActivity : BaseActivity() {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels{
         InjectorUtils.provideMainViewModelFactory(this)
     }
 
     override fun initViewModel() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.lifecycleOwner = this
     }
 
     override fun onCreating(savedInstanceState: Bundle?) {}

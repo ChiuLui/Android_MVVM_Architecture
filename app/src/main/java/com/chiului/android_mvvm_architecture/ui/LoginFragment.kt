@@ -22,7 +22,7 @@ import com.chiului.android_mvvm_architecture.viewmodel.LoginViewModel
  */
 class LoginFragment: BaseNavFragment(), View.OnClickListener {
 
-    lateinit var binding: FragmentLoginBinding
+    private lateinit var binding: FragmentLoginBinding
     private val viewModel: LoginViewModel by viewModels {
         InjectorUtils.provideLoginViewModelFactory(requireContext())
     }

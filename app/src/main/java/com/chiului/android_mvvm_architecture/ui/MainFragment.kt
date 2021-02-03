@@ -22,7 +22,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  */
 class MainFragment : BaseNavFragment() {
 
-    lateinit var binding: FragmentMainBinding
+    private lateinit var binding: FragmentMainBinding
     private val viewModel: MainViewModel by viewModels {
         InjectorUtils.provideMainViewModelFactory(requireActivity())
     }
