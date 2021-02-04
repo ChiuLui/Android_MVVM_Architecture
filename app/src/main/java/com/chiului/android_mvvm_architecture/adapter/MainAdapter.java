@@ -34,7 +34,7 @@ public class MainAdapter extends FragmentStateAdapter {
             case 1:
             case 0:
             default:
-                fragment = HomeFragment.newInstance();
+                fragment = new HomeFragment();
                 Bundle args = new Bundle();
                 // Our object is just an integer :-P
                 args.putString(HomeFragment.ARG_OBJECT, String.valueOf(position + 1));

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -55,13 +56,8 @@ public class RefreshFragment extends BaseFragment implements SwipeRefreshLayout.
     }
 
     @Override
-    public int setContentViewID() {
-        return R.layout.fragment_refresh;
-    }
-
-    @Override
-    public void initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container) {
-        mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false);
+    public View initViewModel(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_refresh, container, false);
         mViewModel = new ViewModelProvider(this, InjectorUtils.INSTANCE.provideMainViewModelFactory(getActivity())).get(MainViewModel.class);
         mBinding.setLifecycleOwner(this);
 
@@ -71,16 +67,13 @@ public class RefreshFragment extends BaseFragment implements SwipeRefreshLayout.
             // 关闭刷新
             mRefresh.setRefreshing(false);
         });
+        return mBinding.getRoot();
     }
 
     @Override
-    public View onCreating(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = mBinding.getRoot();
-
+    public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
         initSwipeRefresh();
         initRecyclerView();
-
-        return rootView;
     }
 
     @Override

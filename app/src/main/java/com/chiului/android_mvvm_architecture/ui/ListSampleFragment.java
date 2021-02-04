@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
@@ -31,20 +32,14 @@ public class ListSampleFragment extends BaseFragment {
     }
 
     @Override
-    public int setContentViewID() {
-        return R.layout.fragment_list_sample;
-    }
-
-    @Override
-    public void initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container) {
-        mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false);
+    public View initViewModel(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_list_sample, container, false);
         mBinding.setLifecycleOwner(this);
+        return mBinding.getRoot();
     }
 
     @Override
-    public View onCreating(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = mBinding.getRoot();
-
+    public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // 初始化适配器
         Module4Adapter adapter = new Module4Adapter(this);
 
@@ -55,8 +50,6 @@ public class ListSampleFragment extends BaseFragment {
         new TabLayoutMediator(mBinding.tabLayout, mBinding.viewPager, (tab, position) -> {
             tab.setText(getTabText(position));
         }).attach();
-
-        return rootView;
     }
 
     /**

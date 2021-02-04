@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -62,13 +63,8 @@ public class ListFragment extends BaseFragment {
     }
 
     @Override
-    public int setContentViewID() {
-        return R.layout.fragment_list;
-    }
-
-    @Override
-    public void initViewModel(LayoutInflater inflater, int layoutId, @Nullable ViewGroup container) {
-        mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false);
+    public View initViewModel(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false);
         mViewModel = new ViewModelProvider(this, InjectorUtils.INSTANCE.provideMainViewModelFactory(getActivity())).get(MainViewModel.class);
         mBinding.setLifecycleOwner(this);
 
@@ -78,10 +74,12 @@ public class ListFragment extends BaseFragment {
             // 设置数据
             mAdapter.submitList(mDataList);
         });
+
+        return mBinding.getRoot();
     }
 
     @Override
-    public View onCreating(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
         View rootView = mBinding.getRoot();
 
         // Set the adapter
@@ -106,8 +104,6 @@ public class ListFragment extends BaseFragment {
             // 获取数据
             mViewModel.getListFragmentDate();
         }
-
-        return rootView;
     }
 
     @Override
