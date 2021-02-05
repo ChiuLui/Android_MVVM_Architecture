@@ -6,12 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 
 import com.chiului.android_mvvm_architecture.lifecycler.BaseLifecycle;
 
