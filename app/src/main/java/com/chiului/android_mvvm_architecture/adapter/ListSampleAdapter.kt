@@ -21,7 +21,7 @@ class ListSampleAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
         // Return a NEW fragment instance in createFragment(int)
         return when(position){
             0 -> ListFragment.getInstance(1)
-            1 -> RefreshFragment.newInstance(2)
+            1 -> RefreshFragment.getInstance(2)
             2 -> PagingFragment.newInstance(2)
             else -> ListFragment.getInstance(position)
         }

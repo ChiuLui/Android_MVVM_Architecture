@@ -10,13 +10,11 @@ import com.chiului.android_mvvm_architecture.dummy.DummyItemBean
 import com.chiului.android_mvvm_architecture.utilities.toast
 
 /**
- * 普通列表示例适配器$
+ * 带刷新列表 Fragment 适配器$
  * @author    神经大条蕾弟
- * @date      2021/02/05 10:56
+ * @date      2021/02/05 16:24
  */
-class ListFragmentAdapter constructor(private val dataList: MutableList<DummyItemBean>) : ListAdapter<DummyItemBean, ListFragmentAdapter.ViewHolder>(
-        ListFragmentDiffCallback()
-) {
+class RefreshFragmentAdapter : ListAdapter<DummyItemBean, RefreshFragmentAdapter.ViewHolder>(RefreshFragmentDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -31,33 +29,6 @@ class ListFragmentAdapter constructor(private val dataList: MutableList<DummyIte
         holder.bind(getItem(position))
     }
 
-    /**
-     * 插入 Item
-     * @param position
-     * @param itemBean
-     */
-    fun addItem(position: Int, itemBean: DummyItemBean) {
-        // 插入数据
-        dataList.add(position, itemBean)
-        // 显示插入动画
-        notifyItemInserted(position)
-        // 重新计算大小(不加 RecyclerView 可能会数组越界)
-        notifyItemRangeChanged(position, itemCount)
-    }
-
-    /**
-     * 删除 Item
-     * @param position
-     */
-    fun removeItem(position: Int) {
-        // 删除数据
-        dataList.removeAt(position)
-        // 显示删除动画
-        notifyItemRemoved(position)
-        // 重新计算大小(不加 RecyclerView 可能会数组越界)
-        notifyItemRangeChanged(position, itemCount)
-    }
-
     class ViewHolder(val binding: ItemFragmentBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(itemBean: DummyItemBean) {
@@ -65,7 +36,7 @@ class ListFragmentAdapter constructor(private val dataList: MutableList<DummyIte
             binding.bean = itemBean
             // 绑定点击事件
             binding.setClickListener {
-                itemBean.content.toast(it.context)
+                itemBean.getContent().toast(it.context)
             }
         }
 
@@ -74,7 +45,7 @@ class ListFragmentAdapter constructor(private val dataList: MutableList<DummyIte
     /**
      * 比较 item 差异
      */
-    class ListFragmentDiffCallback : DiffUtil.ItemCallback<DummyItemBean>() {
+    class RefreshFragmentDiffCallback : DiffUtil.ItemCallback<DummyItemBean>() {
         override fun areItemsTheSame(oldItem: DummyItemBean, newItem: DummyItemBean): Boolean {
             // 是否是相同的 item
             return oldItem.getId() == newItem.getId()
