@@ -31,6 +31,7 @@ buildscript {
         activityVersion = '1.2.0-beta02'
         fragmentVersion = '1.3.0-beta02'
         navVersion = '2.3.2'
+        glideVersion = '4.12.0'
     }
 
     repositories {
