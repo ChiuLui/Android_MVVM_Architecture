@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.chiului.android_mvvm_architecture.R
-import com.chiului.android_mvvm_architecture.base.BaseNavFragment
+import com.chiului.android_mvvm_architecture.base.BaseFragment
 import com.chiului.android_mvvm_architecture.databinding.FragmentMineBinding
 import com.chiului.android_mvvm_architecture.utilities.InjectorUtils
 import com.chiului.android_mvvm_architecture.utilities.load
@@ -18,7 +18,7 @@ import com.chiului.android_mvvm_architecture.viewmodel.MainViewModel
  * @author 神经大条蕾弟
  * @date   2021/02/18 2:18 PM
  */
-class MineFragment : BaseNavFragment(), View.OnClickListener {
+class MineFragment : BaseFragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentMineBinding
     private val viewModel: MainViewModel by viewModels {
