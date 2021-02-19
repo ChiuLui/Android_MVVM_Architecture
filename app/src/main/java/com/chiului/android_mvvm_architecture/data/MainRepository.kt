@@ -42,8 +42,8 @@ class MainRepository private constructor(val appCacheDao: AppCacheDao, val userD
      * 从本地数据库获取用户信息
      * @return
      */
-    fun getLocalUserInfo(): UserBean {
-        val tokenCache: AppCacheBean? = appCacheDao.getAppCache(TOKEN)
+    fun getLocalUserInfo(): UserBean? {
+        val tokenCache: AppCacheBean? = getLocalToken()
         return userDao.getUser(if (tokenCache == null) "" else tokenCache.value)
     }
 
@@ -53,6 +53,13 @@ class MainRepository private constructor(val appCacheDao: AppCacheDao, val userD
      */
     fun getRemoteUserInfo(): Single<ApiResult<UserBean>> {
         return userService.getUserInfo()
+    }
+
+    /**
+     * 获取本地数据库 token
+     */
+    fun getLocalToken(): AppCacheBean? {
+        return appCacheDao.getAppCache(TOKEN)
     }
 
 }

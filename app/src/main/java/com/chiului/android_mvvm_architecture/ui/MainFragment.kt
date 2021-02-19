@@ -41,7 +41,10 @@ class MainFragment : BaseNavFragment() {
     override fun initView(view: View, savedInstanceState: Bundle?) {
         isTopStack = true
         initFragments()
-        viewModel.initUserInfo()
+        if (viewModel.isLogin()) {
+            // 未登录不用初始化用户信息
+            viewModel.initUserInfo()
+        }
     }
 
     private fun initFragments() {

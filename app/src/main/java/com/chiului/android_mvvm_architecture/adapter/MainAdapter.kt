@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.chiului.android_mvvm_architecture.ui.HomeFragment
-import com.chiului.android_mvvm_architecture.ui.ListSampleFragment
 import com.chiului.android_mvvm_architecture.ui.MineFragment
 
 /**
@@ -25,7 +24,8 @@ class MainAdapter constructor(fragment: Fragment) : FragmentStateAdapter(fragmen
         args.putString(HomeFragment.ARG_OBJECT, (position + 1).toString())
 
         return when (position) {
-            2 -> ListSampleFragment.getInstance()
+            // TODO: 2/19/21 神经大条蕾弟：ListSampleFragment 退出登录后会闪退。
+//            2 -> ListSampleFragment.getInstance()
             3 -> MineFragment.getInstance()
             else -> {
                 val homeFragment = HomeFragment()

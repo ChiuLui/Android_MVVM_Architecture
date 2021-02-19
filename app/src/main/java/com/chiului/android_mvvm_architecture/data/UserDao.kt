@@ -25,6 +25,6 @@ interface UserDao {
     fun getUsers(): LiveData<List<UserBean>>
 
     @Query("SELECT * FROM user WHERE token == :token")
-    fun getUser(token: String): UserBean
+    fun getUser(token: String): UserBean?
 
 }

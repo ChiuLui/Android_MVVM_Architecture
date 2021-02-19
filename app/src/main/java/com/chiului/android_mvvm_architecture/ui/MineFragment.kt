@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.chiului.android_mvvm_architecture.R
 import com.chiului.android_mvvm_architecture.base.BaseFragment
@@ -50,7 +49,11 @@ class MineFragment : BaseFragment(), View.OnClickListener {
         viewModel.userInfoBean.observe(this) {
             // 加载头像
             var avatar = binding.avatar
-            avatar.load(it.avatar)
+            if (it == null) {
+                avatar.load(android.R.drawable.ic_menu_camera)
+            } else {
+                avatar.load(it.avatar)
+            }
         }
 
         return binding.root
@@ -63,9 +66,15 @@ class MineFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.image_set_up -> {
-                // 跳转设置页面
-                var toSetUpFragment = MainFragmentDirections.actionMainFragmentToSetUpFragment()
-                findNavController().navigate(toSetUpFragment)
+                if (viewModel.isLogin()) {
+                    // 跳转设置页面
+                    var toSetUpFragment = MainFragmentDirections.actionMainFragmentToSetUpFragment()
+                    findNavController().navigate(toSetUpFragment)
+                } else {
+                    // 登录页面
+                    var toLoginFragment = MainFragmentDirections.actionMainFragmentToLoginFragment()
+                    findNavController().navigate(toLoginFragment)
+                }
             }
         }
     }

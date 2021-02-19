@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.chiului.android_mvvm_architecture.R
 import com.chiului.android_mvvm_architecture.base.BaseNavFragment
@@ -58,7 +57,13 @@ class LoginFragment: BaseNavFragment(), View.OnClickListener {
          * 登录成功
          */
         viewModel.token.observe(this, {
-            toMain()
+            if (MODE_GUEST) {
+                // 游客模式--返回
+                navUp()
+            } else {
+                // 非游客模式--跳转主页
+                toMain()
+            }
         })
 
         return binding.root

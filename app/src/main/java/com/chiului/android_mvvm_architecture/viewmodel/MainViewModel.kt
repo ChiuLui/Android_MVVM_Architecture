@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import com.chiului.android_mvvm_architecture.api.exception.ApiException
 import com.chiului.android_mvvm_architecture.api.observer.ApiObserver
 import com.chiului.android_mvvm_architecture.bean.ApiResult
-import com.chiului.android_mvvm_architecture.dummy.DummyItemBean
 import com.chiului.android_mvvm_architecture.bean.UserBean
 import com.chiului.android_mvvm_architecture.data.MainRepository
 import com.chiului.android_mvvm_architecture.dummy.DummyContent
+import com.chiului.android_mvvm_architecture.dummy.DummyItemBean
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Observable
@@ -93,6 +93,7 @@ class MainViewModel internal constructor(
     fun initUserInfo() {
         repository.getRemoteUserInfo()
                 .subscribeWith(object : ApiObserver<ApiResult<UserBean>>() {
+
                     override fun onSuccess(apiResult: ApiResult<UserBean>) {
                         // 保存用户信息到本地数据库
                         repository.saveUserInfo(apiResult.data)
@@ -109,8 +110,16 @@ class MainViewModel internal constructor(
 
     fun getUserInfo() {
         // 去本地数据库查询用户信息
-        val userInfo: UserBean = repository.getLocalUserInfo()
+        val userInfo: UserBean? = repository.getLocalUserInfo()
         userInfoBean.postValue(userInfo)
+    }
+
+    /**
+     * 是否登录
+     */
+    fun isLogin(): Boolean {
+        var token = repository.getLocalToken()
+        return token != null && token.value.isNotEmpty()
     }
 
 }
