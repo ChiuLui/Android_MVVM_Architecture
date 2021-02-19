@@ -71,10 +71,17 @@ class LoginRepository private constructor(
     }
 
     /**
+     * 获取本地数据库 token
+     */
+    fun getLocalToken(): AppCacheBean? {
+        return appCacheDao.getAppCache(TOKEN)
+    }
+
+    /**
      * 删除本地 token
      */
     fun deleteToken() {
-        val tokenCache: AppCacheBean? = appCacheDao.getAppCache(TOKEN)
+        val tokenCache: AppCacheBean? = getLocalToken()
         if (tokenCache != null) {
             appCacheDao.deleteAppCache(tokenCache)
         }

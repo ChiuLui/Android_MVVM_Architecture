@@ -29,7 +29,7 @@ class LoginViewModel internal constructor(
     val toast = MutableLiveData<String>()
 
     /**
-     * token
+     * 登录成功的 token
      */
     val token = MutableLiveData<String>()
 
@@ -89,6 +89,14 @@ class LoginViewModel internal constructor(
     fun logout() {
         // 删除本地 token
         repository.deleteToken()
+    }
+
+    /**
+     * 是否登录
+     */
+    fun isLogin(): Boolean {
+        var token = repository.getLocalToken()
+        return token != null && token.value.isNotEmpty()
     }
 
 }
