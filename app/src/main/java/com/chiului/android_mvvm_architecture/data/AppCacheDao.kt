@@ -14,6 +14,9 @@ interface AppCacheDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAppCache(cache: AppCacheBean)
 
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateAppCache(cache: AppCacheBean): Int
+
     @Delete
     fun deleteAppCache(cache: AppCacheBean)
 

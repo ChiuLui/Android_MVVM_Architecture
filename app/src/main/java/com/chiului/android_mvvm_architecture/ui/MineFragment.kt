@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.chiului.android_mvvm_architecture.R
 import com.chiului.android_mvvm_architecture.base.BaseFragment
 import com.chiului.android_mvvm_architecture.databinding.FragmentMineBinding
@@ -61,8 +63,9 @@ class MineFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.image_set_up -> {
-                // 设置
-
+                // 跳转设置页面
+                var toSetUpFragment = MainFragmentDirections.actionMainFragmentToSetUpFragment()
+                findNavController().navigate(toSetUpFragment)
             }
         }
     }

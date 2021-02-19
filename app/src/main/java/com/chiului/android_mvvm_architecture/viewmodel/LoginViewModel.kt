@@ -55,11 +55,12 @@ class LoginViewModel internal constructor(
     }
 
     /**
+     * 登录
      * 因为采用 LiveData 与 DataBinding 双向绑定：
      * 输入框的数据会及时反映到 LiveData ，但不会刷新界面
      */
     fun login() {
-        repository.getToken(account.value, password.value)
+        repository.getRemoteToken(account.value, password.value)
                 .subscribeWith(object : ApiObserver<ApiResult<String>>() {
                     override fun onSuccess(apiResult: ApiResult<String>) {
                         // 请求成功
@@ -80,6 +81,14 @@ class LoginViewModel internal constructor(
                         toast.postValue(error?.message)
                     }
                 })
+    }
+
+    /**
+     * 退出登录
+     */
+    fun logout() {
+        // 删除本地 token
+        repository.deleteToken()
     }
 
 }

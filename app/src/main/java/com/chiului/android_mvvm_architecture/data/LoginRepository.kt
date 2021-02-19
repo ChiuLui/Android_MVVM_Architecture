@@ -30,26 +30,54 @@ class LoginRepository private constructor(
                 }
     }
 
+    /**
+     * 保存上次登录账号
+     * @param account String 登录成功的账号
+     */
     fun saveBeforeAccount(account: String) {
         appCacheDao.insertAppCache(AppCacheBean(ACCOUNT_BEFORE, account))
     }
 
+    /**
+     * 获取上次登录的账号
+     * @return String 上次登录的账号
+     */
     fun getBeforeAccount(): String {
         val appCache: AppCacheBean? = appCacheDao.getAppCache(ACCOUNT_BEFORE)
         return appCache?.value ?: ""
     }
 
+    /**
+     * 保存登录成功的 token
+     * @param token String token
+     */
     fun saveToken(token: String) {
         val appCacheBean = AppCacheBean(TOKEN, token)
         appCacheDao.insertAppCache(appCacheBean)
     }
 
-    fun getToken(account: String?, psw: String?): Single<ApiResult<String>> {
+    /**
+     * 从后台获取 token
+     * @param account String?
+     * @param psw String?
+     * @return Single<ApiResult<String>>
+     */
+    fun getRemoteToken(account: String?, psw: String?): Single<ApiResult<String>> {
         val jsonObject = JsonObject()
         jsonObject.addProperty("userName", account)
         jsonObject.addProperty("password", psw)
         val requestBody = BaseApiService.getJsonRequestBody(jsonObject.toString())
         return userService.login(requestBody)
+    }
+
+    /**
+     * 删除本地 token
+     */
+    fun deleteToken() {
+        val tokenCache: AppCacheBean? = appCacheDao.getAppCache(TOKEN)
+        if (tokenCache != null) {
+            appCacheDao.deleteAppCache(tokenCache)
+        }
     }
 
 }

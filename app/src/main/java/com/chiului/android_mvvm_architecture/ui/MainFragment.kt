@@ -35,10 +35,6 @@ class MainFragment : BaseNavFragment() {
             it.toast(requireContext())
         })
 
-        viewModel.userInfoBean.observe(this, {
-            viewModel.toast.value = it.nickName
-        })
-
         return binding.root
     }
 
