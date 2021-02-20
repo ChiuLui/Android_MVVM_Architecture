@@ -46,16 +46,6 @@ class MineFragment : BaseFragment(), View.OnClickListener {
         binding.clickListener = this
         binding.viewModel = viewModel
 
-        viewModel.userInfoBean.observe(this) {
-            // 加载头像
-            var avatar = binding.avatar
-            if (it == null) {
-                avatar.load(android.R.drawable.ic_menu_camera)
-            } else {
-                avatar.load(it.avatar)
-            }
-        }
-
         return binding.root
     }
 
