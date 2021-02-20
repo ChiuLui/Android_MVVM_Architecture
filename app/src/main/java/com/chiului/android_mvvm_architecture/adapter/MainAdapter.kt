@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.chiului.android_mvvm_architecture.ui.HomeFragment
+import com.chiului.android_mvvm_architecture.ui.ListSampleFragment
 import com.chiului.android_mvvm_architecture.ui.MineFragment
 
 /**
