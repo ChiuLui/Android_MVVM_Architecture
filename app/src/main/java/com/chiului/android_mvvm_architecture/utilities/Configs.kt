@@ -34,7 +34,7 @@ const val BACK_EXIT = 2000L
 /**
  * 是否游客模式（无需登录）
  */
-const val MODE_GUEST = false
+const val MODE_GUEST = true
 
 /**
  * 日志打印 tag 名字

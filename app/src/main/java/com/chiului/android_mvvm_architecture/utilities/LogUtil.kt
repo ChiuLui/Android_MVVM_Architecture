@@ -18,7 +18,7 @@ object LogUtil {
     /**
      * 日志打印 tag
      */
-    private val mTag = LOG_TAG
+    private const val mTag = LOG_TAG
 
     fun v(msg: String) {
         if (mIsShow) Log.v(mTag, msg)
